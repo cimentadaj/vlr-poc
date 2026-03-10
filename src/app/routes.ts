@@ -18,4 +18,4 @@ export const router = createBrowserRouter([
       { path: 'emerging-themes', Component: EmergingThematicAnalysis },
     ],
   },
-]);
+], { basename: import.meta.env.BASE_URL.replace(/\/$/, '') });

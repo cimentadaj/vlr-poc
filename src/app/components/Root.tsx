@@ -16,7 +16,10 @@ export function Root() {
       {/* Navigation */}
       <nav className="bg-white border-b border-slate-200 px-6 py-4">
         <div className="max-w-[1600px] mx-auto flex items-center gap-8">
-          <div className="text-xl font-bold text-slate-900">VLR Intelligence Platform</div>
+          <div>
+            <div className="text-xl font-bold text-slate-900">VLR Intelligence Platform</div>
+            <div className="text-xs text-slate-500">Urban Governance Insights from Voluntary Local Reviews</div>
+          </div>
           <div className="flex gap-2">
             <Link
               to="/"

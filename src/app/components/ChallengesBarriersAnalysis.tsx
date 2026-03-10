@@ -32,24 +32,37 @@ const CHALLENGE_ICON_MAP: Record<ChallengeId, { icon: LucideIcon; shortName: str
   other_challenge:         { icon: MoreHorizontal, shortName: 'Other' },
 };
 
+// Realistic challenge data: each challenge type has a distinct profile across SDGs.
+// fiscal_financial peaks for SDGs 1,2,7,8 (poverty, hunger, energy, economy)
+// institutional_governance peaks for SDGs 16,17,11 (institutions, partnerships, cities)
+// legal_regulatory peaks for SDGs 5,10,16 (gender, inequality, justice)
+// human_capacity peaks for SDGs 3,4,9 (health, education, industry)
+// data_monitoring peaks for SDGs 9,12,13 (industry, consumption, climate)
+// multilevel_governance peaks for SDGs 11,13,17 (cities, climate, partnerships)
+// policy_coherence peaks for SDGs 17,16,1 (partnerships, institutions, poverty)
+// political_will peaks for SDGs 5,10,13 (gender, inequality, climate)
+// stakeholder_engagement peaks for SDGs 11,16,17 (cities, justice, partnerships)
+// external_shocks peaks for SDGs 1,2,13 (poverty, hunger, climate)
+// socioeconomic peaks for SDGs 1,2,10 (poverty, hunger, inequality)
+// other_challenge: moderate baseline everywhere
 const challengeBaseBySDG: Record<number, Record<string, number>> = {
-  1:  { fiscal_financial: 72, institutional_governance: 25, legal_regulatory: 12, human_capacity: 23, data_monitoring: 35, multilevel_governance: 10, policy_coherence: 8, political_will: 5, stakeholder_engagement: 15, external_shocks: 10, socioeconomic: 8, other_challenge: 4 },
-  2:  { fiscal_financial: 68, institutional_governance: 24, legal_regulatory: 13, human_capacity: 25, data_monitoring: 38, multilevel_governance: 10, policy_coherence: 7, political_will: 5, stakeholder_engagement: 17, external_shocks: 10, socioeconomic: 9, other_challenge: 3 },
-  3:  { fiscal_financial: 55, institutional_governance: 30, legal_regulatory: 16, human_capacity: 21, data_monitoring: 48, multilevel_governance: 14, policy_coherence: 10, political_will: 6, stakeholder_engagement: 14, external_shocks: 12, socioeconomic: 12, other_challenge: 4 },
-  4:  { fiscal_financial: 50, institutional_governance: 26, legal_regulatory: 14, human_capacity: 29, data_monitoring: 40, multilevel_governance: 12, policy_coherence: 8, political_will: 5, stakeholder_engagement: 19, external_shocks: 10, socioeconomic: 11, other_challenge: 3 },
-  5:  { fiscal_financial: 45, institutional_governance: 32, legal_regulatory: 15, human_capacity: 24, data_monitoring: 42, multilevel_governance: 14, policy_coherence: 10, political_will: 7, stakeholder_engagement: 16, external_shocks: 12, socioeconomic: 11, other_challenge: 4 },
-  6:  { fiscal_financial: 60, institutional_governance: 29, legal_regulatory: 17, human_capacity: 27, data_monitoring: 52, multilevel_governance: 13, policy_coherence: 9, political_will: 6, stakeholder_engagement: 18, external_shocks: 13, socioeconomic: 12, other_challenge: 3 },
-  7:  { fiscal_financial: 65, institutional_governance: 28, legal_regulatory: 15, human_capacity: 21, data_monitoring: 45, multilevel_governance: 12, policy_coherence: 9, political_will: 6, stakeholder_engagement: 14, external_shocks: 12, socioeconomic: 11, other_challenge: 4 },
-  8:  { fiscal_financial: 70, institutional_governance: 30, legal_regulatory: 14, human_capacity: 24, data_monitoring: 38, multilevel_governance: 13, policy_coherence: 10, political_will: 6, stakeholder_engagement: 16, external_shocks: 10, socioeconomic: 11, other_challenge: 3 },
-  9:  { fiscal_financial: 55, institutional_governance: 26, legal_regulatory: 16, human_capacity: 25, data_monitoring: 58, multilevel_governance: 12, policy_coherence: 8, political_will: 5, stakeholder_engagement: 17, external_shocks: 12, socioeconomic: 12, other_challenge: 4 },
-  10: { fiscal_financial: 48, institutional_governance: 34, legal_regulatory: 17, human_capacity: 27, data_monitoring: 42, multilevel_governance: 15, policy_coherence: 10, political_will: 7, stakeholder_engagement: 18, external_shocks: 13, socioeconomic: 12, other_challenge: 3 },
-  11: { fiscal_financial: 52, institutional_governance: 38, legal_regulatory: 22, human_capacity: 29, data_monitoring: 55, multilevel_governance: 18, policy_coherence: 12, political_will: 7, stakeholder_engagement: 19, external_shocks: 17, socioeconomic: 16, other_challenge: 4 },
-  12: { fiscal_financial: 45, institutional_governance: 28, legal_regulatory: 17, human_capacity: 23, data_monitoring: 60, multilevel_governance: 12, policy_coherence: 9, political_will: 6, stakeholder_engagement: 15, external_shocks: 13, socioeconomic: 12, other_challenge: 3 },
-  13: { fiscal_financial: 55, institutional_governance: 36, legal_regulatory: 21, human_capacity: 27, data_monitoring: 58, multilevel_governance: 17, policy_coherence: 11, political_will: 7, stakeholder_engagement: 18, external_shocks: 16, socioeconomic: 15, other_challenge: 4 },
-  14: { fiscal_financial: 50, institutional_governance: 32, legal_regulatory: 19, human_capacity: 24, data_monitoring: 52, multilevel_governance: 14, policy_coherence: 10, political_will: 7, stakeholder_engagement: 16, external_shocks: 15, socioeconomic: 14, other_challenge: 3 },
-  15: { fiscal_financial: 48, institutional_governance: 30, legal_regulatory: 18, human_capacity: 25, data_monitoring: 50, multilevel_governance: 14, policy_coherence: 9, political_will: 6, stakeholder_engagement: 17, external_shocks: 14, socioeconomic: 13, other_challenge: 4 },
-  16: { fiscal_financial: 42, institutional_governance: 42, legal_regulatory: 22, human_capacity: 29, data_monitoring: 45, multilevel_governance: 20, policy_coherence: 14, political_will: 8, stakeholder_engagement: 19, external_shocks: 17, socioeconomic: 16, other_challenge: 3 },
-  17: { fiscal_financial: 38, institutional_governance: 40, legal_regulatory: 23, human_capacity: 21, data_monitoring: 40, multilevel_governance: 18, policy_coherence: 12, political_will: 8, stakeholder_engagement: 14, external_shocks: 18, socioeconomic: 17, other_challenge: 4 },
+  1:  { fiscal_financial: 78, institutional_governance: 32, legal_regulatory: 22, human_capacity: 35, data_monitoring: 30, multilevel_governance: 24, policy_coherence: 42, political_will: 28, stakeholder_engagement: 26, external_shocks: 55, socioeconomic: 62, other_challenge: 18 },
+  2:  { fiscal_financial: 74, institutional_governance: 30, legal_regulatory: 20, human_capacity: 38, data_monitoring: 34, multilevel_governance: 22, policy_coherence: 35, political_will: 24, stakeholder_engagement: 28, external_shocks: 58, socioeconomic: 60, other_challenge: 16 },
+  3:  { fiscal_financial: 48, institutional_governance: 38, legal_regulatory: 30, human_capacity: 62, data_monitoring: 42, multilevel_governance: 28, policy_coherence: 32, political_will: 26, stakeholder_engagement: 34, external_shocks: 35, socioeconomic: 40, other_challenge: 20 },
+  4:  { fiscal_financial: 44, institutional_governance: 34, legal_regulatory: 26, human_capacity: 68, data_monitoring: 36, multilevel_governance: 26, policy_coherence: 30, political_will: 22, stakeholder_engagement: 40, external_shocks: 24, socioeconomic: 38, other_challenge: 18 },
+  5:  { fiscal_financial: 36, institutional_governance: 42, legal_regulatory: 58, human_capacity: 34, data_monitoring: 38, multilevel_governance: 28, policy_coherence: 34, political_will: 52, stakeholder_engagement: 36, external_shocks: 22, socioeconomic: 44, other_challenge: 16 },
+  6:  { fiscal_financial: 56, institutional_governance: 36, legal_regulatory: 32, human_capacity: 44, data_monitoring: 48, multilevel_governance: 38, policy_coherence: 26, political_will: 24, stakeholder_engagement: 30, external_shocks: 34, socioeconomic: 32, other_challenge: 20 },
+  7:  { fiscal_financial: 72, institutional_governance: 30, legal_regulatory: 34, human_capacity: 32, data_monitoring: 36, multilevel_governance: 30, policy_coherence: 28, political_will: 36, stakeholder_engagement: 24, external_shocks: 28, socioeconomic: 26, other_challenge: 18 },
+  8:  { fiscal_financial: 70, institutional_governance: 40, legal_regulatory: 28, human_capacity: 42, data_monitoring: 32, multilevel_governance: 26, policy_coherence: 34, political_will: 30, stakeholder_engagement: 32, external_shocks: 36, socioeconomic: 48, other_challenge: 16 },
+  9:  { fiscal_financial: 52, institutional_governance: 34, legal_regulatory: 30, human_capacity: 56, data_monitoring: 64, multilevel_governance: 28, policy_coherence: 26, political_will: 22, stakeholder_engagement: 28, external_shocks: 26, socioeconomic: 30, other_challenge: 20 },
+  10: { fiscal_financial: 40, institutional_governance: 46, legal_regulatory: 54, human_capacity: 36, data_monitoring: 38, multilevel_governance: 32, policy_coherence: 38, political_will: 48, stakeholder_engagement: 42, external_shocks: 30, socioeconomic: 58, other_challenge: 18 },
+  11: { fiscal_financial: 50, institutional_governance: 56, legal_regulatory: 36, human_capacity: 40, data_monitoring: 52, multilevel_governance: 62, policy_coherence: 36, political_will: 30, stakeholder_engagement: 58, external_shocks: 38, socioeconomic: 36, other_challenge: 20 },
+  12: { fiscal_financial: 38, institutional_governance: 32, legal_regulatory: 34, human_capacity: 36, data_monitoring: 68, multilevel_governance: 24, policy_coherence: 30, political_will: 28, stakeholder_engagement: 30, external_shocks: 26, socioeconomic: 28, other_challenge: 18 },
+  13: { fiscal_financial: 54, institutional_governance: 44, legal_regulatory: 32, human_capacity: 38, data_monitoring: 62, multilevel_governance: 56, policy_coherence: 34, political_will: 50, stakeholder_engagement: 40, external_shocks: 52, socioeconomic: 34, other_challenge: 20 },
+  14: { fiscal_financial: 46, institutional_governance: 38, legal_regulatory: 40, human_capacity: 34, data_monitoring: 54, multilevel_governance: 42, policy_coherence: 28, political_will: 32, stakeholder_engagement: 36, external_shocks: 36, socioeconomic: 30, other_challenge: 18 },
+  15: { fiscal_financial: 44, institutional_governance: 36, legal_regulatory: 38, human_capacity: 38, data_monitoring: 50, multilevel_governance: 40, policy_coherence: 26, political_will: 30, stakeholder_engagement: 34, external_shocks: 34, socioeconomic: 32, other_challenge: 20 },
+  16: { fiscal_financial: 34, institutional_governance: 66, legal_regulatory: 56, human_capacity: 40, data_monitoring: 42, multilevel_governance: 48, policy_coherence: 52, political_will: 38, stakeholder_engagement: 56, external_shocks: 28, socioeconomic: 36, other_challenge: 18 },
+  17: { fiscal_financial: 32, institutional_governance: 60, legal_regulatory: 36, human_capacity: 34, data_monitoring: 44, multilevel_governance: 54, policy_coherence: 58, political_will: 34, stakeholder_engagement: 52, external_shocks: 32, socioeconomic: 34, other_challenge: 20 },
 };
 
 const regionChallengeMultipliers: Record<string, Record<string, number>> = {
@@ -123,11 +136,11 @@ const generateChallengeData = () => {
   });
 
   const temporalData = [
-    { period: '2015-2017', fiscal_financial: 75, institutional_governance: 25, legal_regulatory: 18, human_capacity: 24, data_monitoring: 28, multilevel_governance: 14, policy_coherence: 10, political_will: 8, stakeholder_engagement: 15, external_shocks: 12, socioeconomic: 17, other_challenge: 3 },
-    { period: '2017-2019', fiscal_financial: 72, institutional_governance: 28, legal_regulatory: 20, human_capacity: 26, data_monitoring: 33, multilevel_governance: 16, policy_coherence: 12, political_will: 9, stakeholder_engagement: 17, external_shocks: 14, socioeconomic: 19, other_challenge: 4 },
-    { period: '2019-2021', fiscal_financial: 68, institutional_governance: 33, legal_regulatory: 24, human_capacity: 28, data_monitoring: 42, multilevel_governance: 19, policy_coherence: 15, political_will: 11, stakeholder_engagement: 18, external_shocks: 22, socioeconomic: 21, other_challenge: 4 },
-    { period: '2021-2023', fiscal_financial: 63, institutional_governance: 38, legal_regulatory: 27, human_capacity: 30, data_monitoring: 50, multilevel_governance: 21, policy_coherence: 17, political_will: 13, stakeholder_engagement: 19, external_shocks: 19, socioeconomic: 22, other_challenge: 5 },
-    { period: '2023-2025', fiscal_financial: 58, institutional_governance: 44, legal_regulatory: 30, human_capacity: 31, data_monitoring: 58, multilevel_governance: 24, policy_coherence: 20, political_will: 15, stakeholder_engagement: 20, external_shocks: 18, socioeconomic: 23, other_challenge: 5 },
+    { period: '2015-2017', fiscal_financial: 72, institutional_governance: 30, legal_regulatory: 28, human_capacity: 34, data_monitoring: 32, multilevel_governance: 22, policy_coherence: 24, political_will: 20, stakeholder_engagement: 24, external_shocks: 26, socioeconomic: 38, other_challenge: 16 },
+    { period: '2017-2019', fiscal_financial: 68, institutional_governance: 35, legal_regulatory: 32, human_capacity: 38, data_monitoring: 40, multilevel_governance: 28, policy_coherence: 28, political_will: 26, stakeholder_engagement: 30, external_shocks: 30, socioeconomic: 40, other_challenge: 17 },
+    { period: '2019-2021', fiscal_financial: 62, institutional_governance: 42, legal_regulatory: 36, human_capacity: 42, data_monitoring: 50, multilevel_governance: 36, policy_coherence: 32, political_will: 34, stakeholder_engagement: 36, external_shocks: 48, socioeconomic: 44, other_challenge: 18 },
+    { period: '2021-2023', fiscal_financial: 56, institutional_governance: 48, legal_regulatory: 40, human_capacity: 44, data_monitoring: 56, multilevel_governance: 42, policy_coherence: 36, political_will: 38, stakeholder_engagement: 40, external_shocks: 42, socioeconomic: 46, other_challenge: 19 },
+    { period: '2023-2025', fiscal_financial: 52, institutional_governance: 54, legal_regulatory: 42, human_capacity: 45, data_monitoring: 62, multilevel_governance: 48, policy_coherence: 38, political_will: 40, stakeholder_engagement: 42, external_shocks: 36, socioeconomic: 48, other_challenge: 20 },
   ];
 
   const severityFrequencyData = CHALLENGE_CATEGORIES.map(cat => {
@@ -194,7 +207,7 @@ export function ChallengesBarriersAnalysis() {
   const [hoveredSDG, setHoveredSDG] = useState<number | null>(null);
 
   const connectedSDGs = useMemo(() => {
-    const threshold = 50;
+    const threshold = 35;
     return data
       .filter(d => {
         if (selectedRegion === 'All') {
@@ -321,6 +334,11 @@ export function ChallengesBarriersAnalysis() {
               );
             })}
           </div>
+          {selectedChallengeDetails && (
+            <p className="mt-3 text-sm text-slate-600 italic">
+              {CHALLENGE_CATEGORIES.find(c => c.id === selectedChallenge)?.description}
+            </p>
+          )}
         </div>
 
         {/* Network Visualization */}
@@ -331,7 +349,7 @@ export function ChallengesBarriersAnalysis() {
                 Which SDGs Face This Challenge Together? — {selectedChallengeDetails?.name}
               </h3>
               <p className="text-sm text-slate-600 mt-1">
-                SDGs connected by shared challenge barriers (intensity &gt; 50%)
+                SDGs connected by shared challenge barriers (intensity &gt; 35%)
               </p>
             </div>
           </div>
@@ -407,15 +425,26 @@ export function ChallengesBarriersAnalysis() {
                   const y = centerY + radius * Math.sin(angle - Math.PI / 2);
                   const isConnected = connectedSDGs.includes(sdg);
 
+                  const sdgData = data.find(d => d.sdg === sdg);
+                  const value = selectedRegion === 'All'
+                    ? sdgData?.challenges[selectedChallenge] || 0
+                    : sdgData?.regionalBreakdown[selectedRegion]?.[selectedChallenge] || 0;
+                  const normalizedValue = Math.min(value / 80, 1);
+                  const circleRadius = 18 + normalizedValue * 14;
+                  const fillOpacity = 0.3 + normalizedValue * 0.7;
+                  const challengeColor = selectedChallengeDetails?.color || '#3b82f6';
+
                   return (
                     <g key={sdg} onMouseEnter={() => setHoveredSDG(sdg)} onMouseLeave={() => setHoveredSDG(null)}>
                       <circle
                         cx={x}
                         cy={y}
-                        r={isConnected ? 28 : 20}
-                        fill={isConnected ? (selectedChallengeDetails?.color || '#3b82f6') : '#e2e8f0'}
-                        stroke={isConnected ? '#fff' : '#cbd5e1'}
+                        r={circleRadius}
+                        fill={challengeColor}
+                        fillOpacity={fillOpacity}
+                        stroke={isConnected ? '#fff' : challengeColor}
                         strokeWidth={isConnected ? 3 : 1}
+                        strokeOpacity={isConnected ? 1 : 0.4}
                         className="transition-all cursor-pointer"
                       />
                       <text
@@ -424,14 +453,14 @@ export function ChallengesBarriersAnalysis() {
                         textAnchor="middle"
                         dy="0.35em"
                         className="text-sm font-bold pointer-events-none"
-                        fill={isConnected ? '#fff' : '#64748b'}
+                        fill={fillOpacity > 0.6 ? '#fff' : '#334155'}
                       >
                         {sdg}
                       </text>
                       {isConnected && (
                         <text
                           x={x}
-                          y={y + 45}
+                          y={y + circleRadius + 14}
                           textAnchor="middle"
                           className="text-xs font-medium pointer-events-none"
                           fill="#475569"
@@ -440,15 +469,10 @@ export function ChallengesBarriersAnalysis() {
                         </text>
                       )}
                       {hoveredSDG === sdg && (
-                        <foreignObject x={x - 60} y={y - 55} width="120" height="40">
+                        <foreignObject x={x - 60} y={y - circleRadius - 35} width="120" height="40">
                           <div className="bg-white border border-slate-300 rounded-lg shadow-lg px-2 py-1 text-center">
                             <div className="text-xs font-semibold text-slate-900">{getSDGName(sdg)}</div>
-                            <div className="text-xs text-slate-600">
-                              {selectedRegion === 'All'
-                                ? `${data.find(d => d.sdg === sdg)?.challenges[selectedChallenge] || 0}%`
-                                : `${data.find(d => d.sdg === sdg)?.regionalBreakdown[selectedRegion]?.[selectedChallenge] || 0}%`
-                              }
-                            </div>
+                            <div className="text-xs text-slate-600">{value}%</div>
                           </div>
                         </foreignObject>
                       )}
@@ -468,7 +492,7 @@ export function ChallengesBarriersAnalysis() {
 
             <div className="mt-4 p-4 bg-blue-50 border border-blue-200 border-l-4 border-l-blue-500 rounded-lg">
               <div className="text-sm text-blue-800">
-                <strong>Network Insight:</strong> {connectedSDGs.length} SDGs share high intensity (&gt;50%) of{' '}
+                <strong>Network Insight:</strong> {connectedSDGs.length} SDGs share notable intensity (&gt;35%) of{' '}
                 <strong>{selectedChallengeDetails?.name}</strong> challenges
                 {selectedRegion !== 'All' && ` in ${selectedRegion}`}.
                 This indicates a {connectedSDGs.length > 10 ? 'universal structural bottleneck' : 'SDG-specific barrier pattern'} requiring

@@ -47,18 +47,18 @@ export type Region = (typeof REGIONS)[number];
 // Challenge Categories (12 categories from pipeline's 4_classify.py)
 // ============================================================
 export const CHALLENGE_CATEGORIES = [
-  { id: 'fiscal_financial', name: 'Fiscal & Financial Constraints', color: '#ef4444' },
-  { id: 'institutional_governance', name: 'Institutional & Governance Weaknesses', color: '#dc2626' },
-  { id: 'legal_regulatory', name: 'Legal & Regulatory Gaps', color: '#f59e0b' },
-  { id: 'human_capacity', name: 'Human Capacity & Technical Skills Deficits', color: '#eab308' },
-  { id: 'data_monitoring', name: 'Data Monitoring & Evidence Gaps', color: '#f97316' },
-  { id: 'multilevel_governance', name: 'Multi-Level Governance & Coordination Failures', color: '#8b5cf6' },
-  { id: 'policy_coherence', name: 'Policy Coherence & Integration Deficits', color: '#a855f7' },
-  { id: 'political_will', name: 'Political Will & Continuity Risks', color: '#ec4899' },
-  { id: 'stakeholder_engagement', name: 'Stakeholder Engagement & Participation Deficits', color: '#3b82f6' },
-  { id: 'external_shocks', name: 'External Shocks & Contextual Pressures', color: '#06b6d4' },
-  { id: 'socioeconomic', name: 'Socioeconomic Conditions & Inequality', color: '#10b981' },
-  { id: 'other_challenge', name: 'Other', color: '#94a3b8' },
+  { id: 'fiscal_financial', name: 'Fiscal & Financial Constraints', color: '#ef4444', description: 'Insufficient government budgets, revenue shortfalls, donor dependency, or inability to mobilise private finance for public programmes.' },
+  { id: 'institutional_governance', name: 'Institutional & Governance Weaknesses', color: '#dc2626', description: 'Fragmented mandates, weak local agencies, unclear roles, or lack of enforcement capacity.' },
+  { id: 'legal_regulatory', name: 'Legal & Regulatory Gaps', color: '#f59e0b', description: 'Absent, outdated, or conflicting laws, by-laws, or regulatory frameworks.' },
+  { id: 'human_capacity', name: 'Human Capacity & Technical Skills Deficits', color: '#eab308', description: 'Shortage of trained staff, brain drain, or lack of specialised expertise.' },
+  { id: 'data_monitoring', name: 'Data Monitoring & Evidence Gaps', color: '#f97316', description: 'Missing baselines, unreliable statistics, or absence of monitoring infrastructure.' },
+  { id: 'multilevel_governance', name: 'Multi-Level Governance & Coordination Failures', color: '#8b5cf6', description: 'Misalignment between national and local governments, or poor inter-agency coordination.' },
+  { id: 'policy_coherence', name: 'Policy Coherence & Integration Deficits', color: '#a855f7', description: 'Siloed sectoral policies within a single level of government that contradict or ignore each other.' },
+  { id: 'political_will', name: 'Political Will & Continuity Risks', color: '#ec4899', description: 'Leadership turnover, shifting priorities, or lack of political commitment to long-term goals.' },
+  { id: 'stakeholder_engagement', name: 'Stakeholder Engagement & Participation Deficits', color: '#3b82f6', description: 'Insufficient inclusion of civil society, private sector, or marginalised groups in decision-making.' },
+  { id: 'external_shocks', name: 'External Shocks & Contextual Pressures', color: '#06b6d4', description: 'Climate disasters, pandemics, migration surges, or geopolitical disruptions beyond local control.' },
+  { id: 'socioeconomic', name: 'Socioeconomic Conditions & Inequality', color: '#10b981', description: 'Population-level problems such as poverty, health disparities, debt burdens, housing insecurity, educational gaps, or unequal outcomes across demographic groups.' },
+  { id: 'other_challenge', name: 'Other', color: '#94a3b8', description: 'Challenges that do not fit any category above or are too vague to classify.' },
 ] as const;
 
 export type ChallengeId = (typeof CHALLENGE_CATEGORIES)[number]['id'];

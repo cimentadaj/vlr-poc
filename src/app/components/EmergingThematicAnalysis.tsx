@@ -46,6 +46,7 @@ const generateThematicData = () => {
     { name: 'Liquid Democracy', category: 'participation', baseFrequency: 48, growth: 22, regionStrength: { 'LATAM': 1.5, 'Europe': 1.1, 'North America': 1.0 } },
 
     // Resilience & Adaptation
+    { name: 'Adequate Housing & Basic Services', category: 'resilience', baseFrequency: 68, growth: 46, regionStrength: { 'Africa': 1.5, 'LATAM': 1.4, 'Asia': 1.3, 'Middle East': 1.3, 'Europe': 0.8, 'North America': 0.7, 'Australia & Oceania': 0.7 } },
     { name: 'Climate Adaptation Finance', category: 'resilience', baseFrequency: 88, growth: 30, regionStrength: { 'Asia': 1.3, 'Africa': 1.2, 'LATAM': 1.2, 'Middle East': 1.1 } },
     { name: 'Circular Economy Hubs', category: 'resilience', baseFrequency: 58, growth: 28, regionStrength: { 'Europe': 1.5, 'Asia': 1.1, 'North America': 1.2 } },
     { name: 'Urban Forests & Green Corridors', category: 'resilience', baseFrequency: 52, growth: 35, regionStrength: { 'LATAM': 1.4, 'Africa': 1.2, 'Asia': 1.1 } },
@@ -57,6 +58,7 @@ const generateThematicData = () => {
     { name: 'Quantum Computing Pilots', category: 'innovation', baseFrequency: 18, growth: 40, regionStrength: { 'Europe': 1.3, 'Asia': 1.2, 'North America': 1.3 } },
 
     // Governance Models
+    { name: 'National-Local Alignment', category: 'governance', baseFrequency: 72, growth: 47, regionStrength: { 'Africa': 1.4, 'LATAM': 1.3, 'Asia': 1.3, 'Middle East': 1.1, 'Europe': 1.0, 'North America': 0.9, 'Australia & Oceania': 0.9 } },
     { name: 'Platform Cooperatives', category: 'governance', baseFrequency: 62, growth: 12, regionStrength: { 'Europe': 1.3, 'North America': 1.1 } },
     { name: 'Agile Regulation', category: 'governance', baseFrequency: 35, growth: 38, regionStrength: { 'Asia': 1.4, 'Europe': 1.2, 'North America': 1.1 } },
     { name: 'Predictive Governance', category: 'governance', baseFrequency: 68, growth: 25, regionStrength: { 'Europe': 1.3, 'Asia': 1.2, 'North America': 1.1 } },
@@ -247,6 +249,38 @@ export function EmergingThematicAnalysis() {
             </CollapsibleContent>
           </div>
         </Collapsible>
+
+        {/* Featured Emerging Trends */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div className="bg-white rounded-2xl shadow-sm border border-slate-200/60 p-6 border-l-4" style={{ borderLeftColor: '#ec4899' }}>
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-[10px] font-bold uppercase tracking-wider bg-pink-100 text-pink-700 px-2 py-0.5 rounded-full">Featured Trend</span>
+              <span className="text-green-600 font-semibold text-sm">+47% growth</span>
+            </div>
+            <h3 className="text-lg font-semibold text-slate-900 mb-2">National-Local Alignment</h3>
+            <p className="text-sm text-slate-600 mb-4">
+              VLR-VNR alignment and multi-level governance coherence are accelerating as cities and national governments seek to bridge the implementation gap through coordinated reporting and shared accountability frameworks.
+            </p>
+            <div className="flex flex-col gap-1 text-xs text-slate-500">
+              <span><strong className="text-slate-700">Strongest in:</strong> Africa, LATAM, Asia</span>
+              <span><strong className="text-slate-700">Relevant to:</strong> UNDESA, UNDP</span>
+            </div>
+          </div>
+          <div className="bg-white rounded-2xl shadow-sm border border-slate-200/60 p-6 border-l-4" style={{ borderLeftColor: '#f59e0b' }}>
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-[10px] font-bold uppercase tracking-wider bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full">Featured Trend</span>
+              <span className="text-green-600 font-semibold text-sm">+46% growth</span>
+            </div>
+            <h3 className="text-lg font-semibold text-slate-900 mb-2">Adequate Housing & Basic Services</h3>
+            <p className="text-sm text-slate-600 mb-4">
+              Cities are increasingly centring adequate housing as a cross-cutting priority, aligning with UN-Habitat's Strategic Plan 2026–2029 and SDG 11.1's target of ensuring access for all to adequate, safe, and affordable housing.
+            </p>
+            <div className="flex flex-col gap-1 text-xs text-slate-500">
+              <span><strong className="text-slate-700">Strongest in:</strong> Africa, LATAM, Asia, Middle East</span>
+              <span><strong className="text-slate-700">Relevant to:</strong> UN-Habitat</span>
+            </div>
+          </div>
+        </div>
 
         {/* Main Visualization: Regional Theme Growth Matrix */}
         <div className="bg-white rounded-2xl shadow-sm border border-slate-200/60 p-6 mb-6">
@@ -446,8 +480,8 @@ export function EmergingThematicAnalysis() {
             </div>
             <div className="mt-6 p-4 bg-slate-50 rounded-lg border-l-4 border-blue-500">
               <div className="text-xs text-slate-600">
-                <strong>Insight:</strong> 3 of the top 5 fastest-growing themes are led by Global South regions (Africa, LATAM).
-                Innovation and resilience categories dominate, signaling a paradigm shift in urban governance priorities.
+                <strong>Insight:</strong> National-Local Alignment and Adequate Housing & Basic Services lead the top 5 as critical priorities for UNDESA, UNDP, and UN-Habitat.
+                Global South regions (Africa, LATAM) drive 4 of the 5 fastest-growing themes, signaling a paradigm shift toward multi-level governance coherence and housing equity.
               </div>
             </div>
           </div>

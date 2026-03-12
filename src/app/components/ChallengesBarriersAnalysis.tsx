@@ -11,8 +11,7 @@ import {
   LineChart,
   Line,
 } from 'recharts';
-import { Network, Shield, Database, DollarSign, AlertCircle, Clock, Scale, BookOpen, Layers, Puzzle, Flag, MessageCircle, Zap, HeartHandshake, MoreHorizontal, ChevronDown } from 'lucide-react';
-import { Collapsible, CollapsibleTrigger, CollapsibleContent } from './ui/collapsible';
+import { Network, Shield, Database, DollarSign, Clock, Scale, BookOpen, Layers, Puzzle, Flag, MessageCircle, Zap, HeartHandshake, MoreHorizontal } from 'lucide-react';
 import { Tooltip as UITooltip, TooltipTrigger, TooltipContent } from './ui/tooltip';
 import type { LucideIcon } from 'lucide-react';
 import { REGIONS, CHALLENGE_CATEGORIES, ChallengeId, getSDGName } from './data/constants';
@@ -202,7 +201,7 @@ export function ChallengesBarriersAnalysis() {
 
   const [selectedChallenge, setSelectedChallenge] = useState<string>('fiscal_financial');
   const [selectedRegion, setSelectedRegion] = useState<string>('All');
-  const [strategicOpen, setStrategicOpen] = useState(true);
+
   const [showAllLines, setShowAllLines] = useState(false);
   const [hoveredSDG, setHoveredSDG] = useState<number | null>(null);
 
@@ -258,48 +257,6 @@ export function ChallengesBarriersAnalysis() {
             What do cities consistently identify as their main constraints to SDG implementation?
           </p>
         </div>
-
-        {/* Strategic Value */}
-        <Collapsible open={strategicOpen} onOpenChange={setStrategicOpen} className="bg-white rounded-2xl shadow-sm border border-slate-200/60 p-6 mb-6">
-          <CollapsibleTrigger className="flex items-center justify-between w-full">
-            <div>
-              <h2 className="text-xl font-semibold text-slate-900">Strategic Value</h2>
-              <p className="text-sm text-slate-500 mt-1">The #1 barrier isn't fiscal — it's governance coordination. And wealthier regions have it worse.</p>
-            </div>
-            <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform ${strategicOpen ? 'rotate-180' : ''}`} />
-          </CollapsibleTrigger>
-          <CollapsibleContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
-              <div className="border-l-4 border-red-500 pl-4">
-                <div className="flex items-center gap-2 text-red-700 mb-2">
-                  <AlertCircle className="w-5 h-5" />
-                  <div className="font-semibold">Structural Bottlenecks</div>
-                </div>
-                <div className="text-sm text-slate-600">
-                  Identifies constraints cities cannot solve alone, requiring system-level interventions
-                </div>
-              </div>
-              <div className="border-l-4 border-orange-500 pl-4">
-                <div className="flex items-center gap-2 text-orange-700 mb-2">
-                  <DollarSign className="w-5 h-5" />
-                  <div className="font-semibold">Donor Framing</div>
-                </div>
-                <div className="text-sm text-slate-600">
-                  Strong input for shaping donor priorities and resource allocation strategies
-                </div>
-              </div>
-              <div className="border-l-4 border-purple-500 pl-4">
-                <div className="flex items-center gap-2 text-purple-700 mb-2">
-                  <Network className="w-5 h-5" />
-                  <div className="font-semibold">Cross-SDG Patterns</div>
-                </div>
-                <div className="text-sm text-slate-600">
-                  Reveals which barriers are universal vs SDG-specific for targeted solutions
-                </div>
-              </div>
-            </div>
-          </CollapsibleContent>
-        </Collapsible>
 
         {/* Challenge Selector */}
         <div className="bg-white rounded-2xl shadow-sm border border-slate-200/60 p-6 mb-6">

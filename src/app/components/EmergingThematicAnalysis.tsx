@@ -215,7 +215,7 @@ export function EmergingThematicAnalysis() {
             </p>
             <div className="flex flex-col gap-1 text-xs text-slate-500">
               <span><strong className="text-slate-700">Strongest in:</strong> Africa, LATAM, Asia</span>
-              <span><strong className="text-slate-700">Relevant to:</strong> UNDESA, UNDP</span>
+              <span><strong className="text-slate-700">Relevant to:</strong> Multi-level governance actors</span>
             </div>
           </div>
           <div className="bg-white rounded-2xl shadow-sm border border-slate-200/60 p-6 border-l-4" style={{ borderLeftColor: '#f59e0b' }}>
@@ -432,7 +432,7 @@ export function EmergingThematicAnalysis() {
             </div>
             <div className="mt-6 p-4 bg-slate-50 rounded-lg border-l-4 border-blue-500">
               <div className="text-xs text-slate-600">
-                <strong>Insight:</strong> National-Local Alignment and Adequate Housing & Basic Services lead the top 5 as critical priorities for UNDESA, UNDP, and UN-Habitat.
+                <strong>Insight:</strong> National-Local Alignment and Adequate Housing & Basic Services lead the top 5 as critical priorities for UN-Habitat and multi-level governance actors.
                 Global South regions (Africa, LATAM) drive 4 of the 5 fastest-growing themes, signaling a paradigm shift toward multi-level governance coherence and housing equity.
               </div>
             </div>

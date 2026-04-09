@@ -67,14 +67,14 @@ export type ChallengeId = (typeof CHALLENGE_CATEGORIES)[number]['id'];
 // Policy Categories (8 categories from pipeline's 4_classify.py)
 // ============================================================
 export const POLICY_CATEGORIES = [
-  { id: 'information_awareness', name: 'Information, Awareness & Capacity Building', color: '#3b82f6' },
-  { id: 'public_investment', name: 'Public Investment & Procurement', color: '#8b5cf6' },
-  { id: 'economic_fiscal', name: 'Economic & Fiscal Instruments', color: '#ec4899' },
-  { id: 'voluntary_partnership', name: 'Voluntary & Partnership Approaches', color: '#f59e0b' },
-  { id: 'strategic_planning', name: 'Strategic Planning & Policy Frameworks', color: '#10b981' },
-  { id: 'monitoring_evaluation', name: 'Monitoring, Evaluation & Data Systems', color: '#06b6d4' },
-  { id: 'regulation_standards', name: 'Regulation & Standards', color: '#ef4444' },
-  { id: 'other_policy', name: 'Other', color: '#94a3b8' },
+  { id: 'information_awareness', name: 'Information, Awareness & Capacity Building', color: '#3b82f6', description: 'Public campaigns, training programmes, and knowledge-sharing activities aimed at raising awareness or building skills.' },
+  { id: 'public_investment', name: 'Public Investment & Procurement', color: '#8b5cf6', description: 'Direct government spending on infrastructure, services, or procurement contracts to deliver public goods.' },
+  { id: 'economic_fiscal', name: 'Tax & Fiscal Incentives', color: '#ec4899', description: 'Tax breaks, subsidies, fees, levies, or other financial mechanisms used to incentivize or disincentivize behavior.' },
+  { id: 'voluntary_partnership', name: 'Voluntary & Partnership Approaches', color: '#f59e0b', description: 'Non-binding agreements, voluntary standards, and public-private partnerships relying on collaboration rather than regulation.' },
+  { id: 'strategic_planning', name: 'Strategic Planning & Policy Frameworks', color: '#10b981', description: 'Master plans, roadmaps, and formal frameworks that set direction without direct spending or regulation.' },
+  { id: 'monitoring_evaluation', name: 'Monitoring, Evaluation & Data Systems', color: '#06b6d4', description: 'Indicator frameworks, dashboards, and data collection systems to track progress.' },
+  { id: 'regulation_standards', name: 'Regulation & Standards', color: '#ef4444', description: 'Mandatory rules, building codes, emission standards, or other legally binding requirements.' },
+  { id: 'other_policy', name: 'Other', color: '#94a3b8', description: 'Policy actions that do not fit any category above.' },
 ] as const;
 
 export type PolicyId = (typeof POLICY_CATEGORIES)[number]['id'];
@@ -83,15 +83,15 @@ export type PolicyId = (typeof POLICY_CATEGORIES)[number]['id'];
 // Commitment Categories (9 categories from pipeline's 4_classify.py)
 // ============================================================
 export const COMMITMENT_CATEGORIES = [
-  { id: 'strategy_plan', name: 'Strategy & Plan Development', color: '#3b82f6' },
-  { id: 'regulatory_reform', name: 'Regulatory & Legislative Reform', color: '#ef4444' },
-  { id: 'capital_investment', name: 'Capital Investment & Infrastructure', color: '#f59e0b' },
-  { id: 'programme_service', name: 'Programme & Service Launch', color: '#10b981' },
-  { id: 'institutional_capacity', name: 'Institutional Restructuring & Capacity Building', color: '#8b5cf6' },
-  { id: 'data_reporting', name: 'Data Monitoring & Reporting Systems', color: '#06b6d4' },
-  { id: 'partnership_collaboration', name: 'Partnership & Collaboration', color: '#ec4899' },
-  { id: 'target_goal', name: 'Target & Goal Declaration', color: '#f97316' },
-  { id: 'other_commitment', name: 'Other', color: '#94a3b8' },
+  { id: 'strategy_plan', name: 'Strategy & Plan Development', color: '#3b82f6', description: 'Commitments to create or adopt strategic plans, roadmaps, or policy frameworks.' },
+  { id: 'regulatory_reform', name: 'Regulatory & Legislative Reform', color: '#ef4444', description: 'Commitments to change laws, regulations, by-laws, or standards.' },
+  { id: 'capital_investment', name: 'Capital Investment & Infrastructure', color: '#f59e0b', description: 'Commitments to fund or build physical infrastructure or major capital projects.' },
+  { id: 'programme_service', name: 'Programme & Service Launch', color: '#10b981', description: 'Commitments to start new programmes, services, or operational initiatives.' },
+  { id: 'institutional_capacity', name: 'Institutional Restructuring & Capacity Building', color: '#8b5cf6', description: 'Commitments to reorganize agencies, create new offices, or train government staff.' },
+  { id: 'data_reporting', name: 'Data Monitoring & Reporting Systems', color: '#06b6d4', description: 'Commitments to establish or improve data collection, indicators, or reporting.' },
+  { id: 'partnership_collaboration', name: 'Partnership & Collaboration', color: '#ec4899', description: 'Commitments to form or strengthen partnerships with other governments, private sector, or civil society.' },
+  { id: 'target_goal', name: 'Quantitative Target Setting', color: '#f97316', description: 'Specific numerical targets or measurable goals (e.g., "reduce emissions 40% by 2030").' },
+  { id: 'other_commitment', name: 'Other', color: '#94a3b8', description: 'Commitments that do not fit any category above.' },
 ] as const;
 
 export type CommitmentId = (typeof COMMITMENT_CATEGORIES)[number]['id'];

@@ -98,6 +98,7 @@ async function main() {
       generateItemDistribution(pool, 'Commitment', 'commitment-distribution.json'),
       generateTemporalTrends(pool),
       generateEvidenceQuotes(pool),
+      generateCountryStats(pool),
     ]);
 
     console.log('All data generated successfully.');
@@ -334,6 +335,34 @@ async function generateEvidenceQuotes(pool) {
     .filter(Boolean);
 
   writeJSON('evidence-quotes.json', result);
+}
+
+// ---------------------------------------------------------------------------
+// Query 8: Country-level stats (for Overview page)
+// ---------------------------------------------------------------------------
+async function generateCountryStats(pool) {
+  const { rows } = await pool.query(`
+    SELECT
+      d.country,
+      d.region,
+      COUNT(DISTINCT d.id) as doc_count,
+      COUNT(i.id) as item_count
+    FROM vlr_raw_docs d
+    LEFT JOIN vlr_slices s ON s.raw_doc_id = d.id AND s.sdg_tag ~ '^\\d+$'
+    LEFT JOIN vlr_raw_items i ON i.slice_id = s.id
+    WHERE d.country IS NOT NULL AND d.region IS NOT NULL
+    GROUP BY d.country, d.region
+    ORDER BY item_count DESC
+  `);
+
+  const result = rows.map(r => ({
+    country: r.country,
+    region: r.region,
+    docCount: Number(r.doc_count),
+    itemCount: Number(r.item_count),
+  }));
+
+  writeJSON('country-stats.json', result);
 }
 
 // ---------------------------------------------------------------------------

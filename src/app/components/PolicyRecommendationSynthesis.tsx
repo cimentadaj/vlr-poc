@@ -9,7 +9,8 @@ import {
   ResponsiveContainer,
   Cell,
 } from 'recharts';
-import { TrendingUp, Quote } from 'lucide-react';
+import { TrendingUp, Quote, Info } from 'lucide-react';
+import { Tooltip as UITooltip, TooltipTrigger, TooltipContent } from './ui/tooltip';
 import { REGIONS, POLICY_CATEGORIES, getSDGName } from './data/constants';
 import policyRaw from '@/data/generated/policy-distribution.json';
 import evidenceRaw from '@/data/generated/evidence-quotes.json';
@@ -168,10 +169,10 @@ export function PolicyRecommendationSynthesis() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-slate-900 mb-2">
-            Policy Recommendation Synthesis
+            Policy Actions & Implementation
           </h1>
           <p className="text-lg text-slate-600">
-            How do policy approaches cluster across SDGs and regions?
+            How are cities implementing policy actions across SDGs and regions?
           </p>
         </div>
 
@@ -244,6 +245,7 @@ export function PolicyRecommendationSynthesis() {
                       fontSize={11} fill="#94a3b8" fontWeight={500}>Engagement &amp; Partnership-led</text>
                     <text x={margin.left + plotW - 4} y={margin.top + plotH - 4} textAnchor="end"
                       fontSize={11} fill="#94a3b8" fontWeight={500}>Investment-led</text>
+                    <title>High direct investment + high strategic planning = balanced, multi-faceted policy approach</title>
                     <text x={margin.left + plotW - 4} y={margin.top + 14} textAnchor="end"
                       fontSize={11} fill="#94a3b8" fontWeight={500}>Comprehensive</text>
                     <text x={margin.left + 4} y={margin.top + 14} textAnchor="start"
@@ -401,7 +403,7 @@ export function PolicyRecommendationSynthesis() {
                     }}
                     formatter={(value: any, _name: any, props: any) => [`${value}%`, props.payload.type]}
                   />
-                  <Bar dataKey="value" name="Share of Recommendations" radius={[4, 4, 0, 0]}>
+                  <Bar dataKey="value" name="Share of Actions" radius={[4, 4, 0, 0]}>
                     {recommendationTypes.filter(t => t !== 'Other').map((type, index) => (
                       <Cell key={index} fill={typeColors[type]} />
                     ))}
@@ -416,16 +418,34 @@ export function PolicyRecommendationSynthesis() {
                     <span className="font-semibold text-sm text-purple-900">Dominant Type</span>
                   </div>
                   <div className="text-sm text-purple-800">
-                    <span className="font-bold">{dominantType.type}</span> — {dominantType.value}% of recommendations
+                    <span className="font-bold">{dominantType.type}</span> — {dominantType.value}% of actions
                   </div>
                 </div>
               )}
+
+              {/* Category legend with tooltip descriptions */}
+              <div className="flex flex-wrap gap-2 mt-4">
+                {POLICY_CATEGORIES.filter(c => c.id !== 'other_policy').map(cat => (
+                  <UITooltip key={cat.id}>
+                    <TooltipTrigger asChild>
+                      <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded text-xs cursor-help border border-slate-200 hover:border-slate-300 transition-colors">
+                        <span className="w-2.5 h-2.5 rounded-sm flex-shrink-0" style={{ backgroundColor: cat.color }} />
+                        {cat.name}
+                        <Info className="w-3 h-3 text-slate-400" />
+                      </span>
+                    </TooltipTrigger>
+                    <TooltipContent className="max-w-xs">
+                      <p>{cat.description}</p>
+                    </TooltipContent>
+                  </UITooltip>
+                ))}
+              </div>
             </div>
 
             {/* Right: Evidence quotes */}
             <div className="bg-white rounded-2xl shadow-sm border border-slate-200/60 p-6">
               <h3 className="text-lg font-semibold text-slate-900 mb-4">
-                Policy Examples: SDG {selectedSDG} — {getSDGName(selectedSDG)}
+                Implementation Examples: SDG {selectedSDG} — {getSDGName(selectedSDG)}
               </h3>
               {topQuotes.length > 0 ? (
                 <div className="space-y-4">

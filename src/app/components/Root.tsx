@@ -1,5 +1,5 @@
 import { Link, Outlet, useLocation } from 'react-router';
-import { BarChart3, FileText, AlertTriangle, Target } from 'lucide-react';
+import { LayoutDashboard, BarChart3, FileText, AlertTriangle, Target } from 'lucide-react';
 
 export function Root() {
   const location = useLocation();
@@ -29,19 +29,30 @@ export function Root() {
                   : 'border-transparent text-slate-600 hover:bg-slate-100'
               }`}
             >
-              <BarChart3 className="w-4 h-4" />
-              SDG Coverage Analysis
+              <LayoutDashboard className="w-4 h-4" />
+              Overview
             </Link>
             <Link
-              to="/policy-recommendations"
+              to="/sdg-coverage"
               className={`flex items-center gap-2 px-4 py-2 border-b-2 text-sm font-medium transition-colors ${
-                isActive('/policy-recommendations')
+                isActive('/sdg-coverage')
+                  ? 'text-blue-700 border-blue-600 bg-transparent'
+                  : 'border-transparent text-slate-600 hover:bg-slate-100'
+              }`}
+            >
+              <BarChart3 className="w-4 h-4" />
+              SDG Coverage
+            </Link>
+            <Link
+              to="/policy-actions"
+              className={`flex items-center gap-2 px-4 py-2 border-b-2 text-sm font-medium transition-colors ${
+                isActive('/policy-actions')
                   ? 'text-blue-700 border-blue-600 bg-transparent'
                   : 'border-transparent text-slate-600 hover:bg-slate-100'
               }`}
             >
               <FileText className="w-4 h-4" />
-              Policy Recommendations
+              Policy Actions
             </Link>
             <Link
               to="/challenges-barriers"
@@ -63,9 +74,8 @@ export function Root() {
               }`}
             >
               <Target className="w-4 h-4" />
-              Commitment Statements
+              Commitments
             </Link>
-            {/* Emerging Themes temporarily disabled — no DB-backed data yet */}
           </div>
         </div>
       </nav>

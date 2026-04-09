@@ -190,8 +190,9 @@ export function ChallengesBarriersAnalysis() {
                     </button>
                   </TooltipTrigger>
                   {!isSelected && (
-                    <TooltipContent>
-                      <p>{meta.shortName}</p>
+                    <TooltipContent className="max-w-xs">
+                      <p className="font-medium">{meta.shortName}</p>
+                      <p className="mt-1 opacity-80">{cat.description}</p>
                     </TooltipContent>
                   )}
                 </UITooltip>

@@ -25,7 +25,7 @@ import {
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { REGIONS, COMMITMENT_CATEGORIES, CommitmentId, getSDGName } from './data/constants';
-// Select removed — SDG selection now via bar chart click
+import { Tooltip as UITooltip, TooltipTrigger, TooltipContent } from './ui/tooltip';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from './ui/tabs';
 import commitmentRaw from '@/data/generated/commitment-distribution.json';
 import challengeRaw from '@/data/generated/challenge-distribution.json';
@@ -38,7 +38,7 @@ const COMMITMENT_ICON_MAP: Record<CommitmentId, { icon: LucideIcon; shortName: s
   institutional_capacity:   { icon: Building,      shortName: 'Institutional' },
   data_reporting:           { icon: Database,      shortName: 'Data & Reporting' },
   partnership_collaboration:{ icon: Handshake,     shortName: 'Partnerships' },
-  target_goal:              { icon: Crosshair,     shortName: 'Targets & Goals' },
+  target_goal:              { icon: Crosshair,     shortName: 'Quantitative Targets' },
   other_commitment:         { icon: MoreHorizontal,shortName: 'Other' },
 };
 
@@ -253,7 +253,14 @@ export function CommitmentStatementsAnalysis() {
                   return (
                     <div key={cat.id} className="mb-3">
                       <div className="flex items-center justify-between text-sm mb-1">
-                        <span className="text-slate-700">{meta.shortName}</span>
+                        <UITooltip>
+                          <TooltipTrigger asChild>
+                            <span className="text-slate-700 cursor-help border-b border-dotted border-slate-300">{meta.shortName}</span>
+                          </TooltipTrigger>
+                          <TooltipContent className="max-w-xs">
+                            <p>{cat.description}</p>
+                          </TooltipContent>
+                        </UITooltip>
                         <span className="font-medium text-slate-900">{value}%</span>
                       </div>
                       <div className="w-full bg-slate-200 rounded-full h-2">

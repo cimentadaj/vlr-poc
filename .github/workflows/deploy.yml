@@ -62,6 +62,6 @@ jobs:
             echo "No changes to publish"
             exit 0
           fi
-          git pull --rebase origin main
           git commit -m "Update vlr-observatory from vlr-poc@${{ github.sha }}"
+          git pull --rebase origin main
           git push origin main

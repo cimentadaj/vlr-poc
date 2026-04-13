@@ -1,20 +1,19 @@
-name: Deploy to GitHub Pages
+name: Deploy to nexusgovernance.eu/vlr-observatory
 
 on:
   push:
     branches: [master]
+  workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  group: deploy-vlr-observatory
   cancel-in-progress: true
 
 jobs:
-  build:
+  build-and-publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -33,16 +32,36 @@ jobs:
 
       - run: npm run build
 
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
+      - name: Add SPA 404 fallback
+        run: cp dist/index.html dist/404.html
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Configure SSH deploy key for nexus_website
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.NEXUS_DEPLOY_KEY }}" > ~/.ssh/nexus_deploy
+          chmod 600 ~/.ssh/nexus_deploy
+          ssh-keyscan github.com >> ~/.ssh/known_hosts 2>/dev/null
+          cat >> ~/.ssh/config <<'EOF'
+          Host github-nexus
+            HostName github.com
+            User git
+            IdentityFile ~/.ssh/nexus_deploy
+            IdentitiesOnly yes
+          EOF
+
+      - name: Publish dist to nexus_website/vlr-observatory
+        run: |
+          git config --global user.email "deploy-bot@cimentadaj.dev"
+          git config --global user.name "vlr-observatory deploy bot"
+          git clone git@github-nexus:cimentadaj/nexus_website.git nexus
+          cd nexus
+          mkdir -p vlr-observatory
+          rsync -a --delete ../dist/ vlr-observatory/
+          git add vlr-observatory
+          if git diff --cached --quiet; then
+            echo "No changes to publish"
+            exit 0
+          fi
+          git pull --rebase origin main
+          git commit -m "Update vlr-observatory from vlr-poc@${{ github.sha }}"
+          git push origin main

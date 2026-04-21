@@ -45,11 +45,10 @@ function computeDistribution(items: Array<{ categoryId: string; count: number }>
 
 const regionShort: Record<string, string> = {
   'Africa': 'AFR',
-  'Asia': 'ASIA',
-  'Australia & Oceania': 'OCE',
+  'Arab States': 'ARB',
+  'Asia & Pacific': 'AP',
   'Europe': 'EUR',
-  'LATAM': 'LAT',
-  'Middle East': 'ME',
+  'Latin America & Caribbean': 'LAC',
   'North America': 'NAM',
 };
 
@@ -63,11 +62,10 @@ const SDG_COLORS: Record<number, string> = {
 
 const REGION_COLORS: Record<string, string> = {
   'Africa': '#e5243b',
-  'Asia': '#FCC30B',
-  'Australia & Oceania': '#26BDE2',
+  'Arab States': '#A21942',
+  'Asia & Pacific': '#FCC30B',
   'Europe': '#3F7E44',
-  'LATAM': '#FD6925',
-  'Middle East': '#A21942',
+  'Latin America & Caribbean': '#FD6925',
   'North America': '#00689D',
 };
 

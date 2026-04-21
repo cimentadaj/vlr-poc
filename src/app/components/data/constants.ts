@@ -32,13 +32,12 @@ export function getSDGName(id: number): string {
 // Regions (from pipeline's 2_slice.py region classification)
 // ============================================================
 export const REGIONS = [
-  'LATAM',
-  'North America',
-  'Europe',
   'Africa',
-  'Middle East',
-  'Asia',
-  'Australia & Oceania',
+  'Arab States',
+  'Asia & Pacific',
+  'Europe',
+  'Latin America & Caribbean',
+  'North America',
 ] as const;
 
 export type Region = (typeof REGIONS)[number];

@@ -35,43 +35,43 @@ const generateThematicData = () => {
   // Emerging themes with their characteristics
   const baseThemes = [
     // Digital Transformation
-    { name: 'AI in Public Services', category: 'digital', baseFrequency: 45, growth: 25, regionStrength: { 'Europe': 1.3, 'Asia': 1.4, 'Africa': 0.6, 'North America': 1.2, 'Australia & Oceania': 1.1 } },
-    { name: 'Digital Twin Cities', category: 'digital', baseFrequency: 65, growth: 15, regionStrength: { 'Europe': 1.2, 'Asia': 1.3, 'North America': 1.1, 'Australia & Oceania': 1.0 } },
-    { name: 'Smart Mobility Hubs', category: 'digital', baseFrequency: 80, growth: 10, regionStrength: { 'Europe': 1.4, 'LATAM': 1.1, 'North America': 1.2 } },
+    { name: 'AI in Public Services', category: 'digital', baseFrequency: 45, growth: 25, regionStrength: { 'Europe': 1.3, 'Asia & Pacific': 1.25, 'Africa': 0.6, 'North America': 1.2 } },
+    { name: 'Digital Twin Cities', category: 'digital', baseFrequency: 65, growth: 15, regionStrength: { 'Europe': 1.2, 'Asia & Pacific': 1.15, 'North America': 1.1 } },
+    { name: 'Smart Mobility Hubs', category: 'digital', baseFrequency: 80, growth: 10, regionStrength: { 'Europe': 1.4, 'Latin America & Caribbean': 1.1, 'North America': 1.2 } },
 
     // Participation & Inclusion
-    { name: 'Co-creation Labs', category: 'participation', baseFrequency: 55, growth: 20, regionStrength: { 'Europe': 1.3, 'LATAM': 1.2, 'North America': 1.1 } },
-    { name: 'Youth Climate Councils', category: 'participation', baseFrequency: 72, growth: 18, regionStrength: { 'Africa': 1.4, 'LATAM': 1.2, 'Middle East': 1.1 } },
-    { name: 'Liquid Democracy', category: 'participation', baseFrequency: 48, growth: 22, regionStrength: { 'LATAM': 1.5, 'Europe': 1.1, 'North America': 1.0 } },
+    { name: 'Co-creation Labs', category: 'participation', baseFrequency: 55, growth: 20, regionStrength: { 'Europe': 1.3, 'Latin America & Caribbean': 1.2, 'North America': 1.1 } },
+    { name: 'Youth Climate Councils', category: 'participation', baseFrequency: 72, growth: 18, regionStrength: { 'Africa': 1.4, 'Latin America & Caribbean': 1.2, 'Arab States': 1.1 } },
+    { name: 'Liquid Democracy', category: 'participation', baseFrequency: 48, growth: 22, regionStrength: { 'Latin America & Caribbean': 1.5, 'Europe': 1.1, 'North America': 1.0 } },
 
     // Resilience & Adaptation
-    { name: 'Adequate Housing & Basic Services', category: 'resilience', baseFrequency: 68, growth: 46, regionStrength: { 'Africa': 1.5, 'LATAM': 1.4, 'Asia': 1.3, 'Middle East': 1.3, 'Europe': 0.8, 'North America': 0.7, 'Australia & Oceania': 0.7 } },
-    { name: 'Climate Adaptation Finance', category: 'resilience', baseFrequency: 88, growth: 30, regionStrength: { 'Asia': 1.3, 'Africa': 1.2, 'LATAM': 1.2, 'Middle East': 1.1 } },
-    { name: 'Circular Economy Hubs', category: 'resilience', baseFrequency: 58, growth: 28, regionStrength: { 'Europe': 1.5, 'Asia': 1.1, 'North America': 1.2 } },
-    { name: 'Urban Forests & Green Corridors', category: 'resilience', baseFrequency: 52, growth: 35, regionStrength: { 'LATAM': 1.4, 'Africa': 1.2, 'Asia': 1.1 } },
-    { name: 'Resilience Bonds', category: 'resilience', baseFrequency: 70, growth: 20, regionStrength: { 'Europe': 1.1, 'North America': 1.1, 'Australia & Oceania': 1.0 } },
+    { name: 'Adequate Housing & Basic Services', category: 'resilience', baseFrequency: 68, growth: 46, regionStrength: { 'Africa': 1.5, 'Latin America & Caribbean': 1.4, 'Asia & Pacific': 1.0, 'Arab States': 1.3, 'Europe': 0.8, 'North America': 0.7 } },
+    { name: 'Climate Adaptation Finance', category: 'resilience', baseFrequency: 88, growth: 30, regionStrength: { 'Asia & Pacific': 1.3, 'Africa': 1.2, 'Latin America & Caribbean': 1.2, 'Arab States': 1.1 } },
+    { name: 'Circular Economy Hubs', category: 'resilience', baseFrequency: 58, growth: 28, regionStrength: { 'Europe': 1.5, 'Asia & Pacific': 1.1, 'North America': 1.2 } },
+    { name: 'Urban Forests & Green Corridors', category: 'resilience', baseFrequency: 52, growth: 35, regionStrength: { 'Latin America & Caribbean': 1.4, 'Africa': 1.2, 'Asia & Pacific': 1.1 } },
+    { name: 'Resilience Bonds', category: 'resilience', baseFrequency: 70, growth: 20, regionStrength: { 'Europe': 1.1, 'North America': 1.1, 'Asia & Pacific': 1.0 } },
 
     // Innovation & Technology
-    { name: 'Green Hydrogen', category: 'innovation', baseFrequency: 25, growth: 45, regionStrength: { 'LATAM': 1.4, 'Africa': 1.3, 'Middle East': 1.3, 'Australia & Oceania': 1.2 } },
-    { name: 'Blockchain Governance', category: 'innovation', baseFrequency: 42, growth: 22, regionStrength: { 'Asia': 1.3, 'Europe': 1.2, 'Middle East': 1.1 } },
-    { name: 'Quantum Computing Pilots', category: 'innovation', baseFrequency: 18, growth: 40, regionStrength: { 'Europe': 1.3, 'Asia': 1.2, 'North America': 1.3 } },
+    { name: 'Green Hydrogen', category: 'innovation', baseFrequency: 25, growth: 45, regionStrength: { 'Latin America & Caribbean': 1.4, 'Africa': 1.3, 'Arab States': 1.3, 'Asia & Pacific': 1.2 } },
+    { name: 'Blockchain Governance', category: 'innovation', baseFrequency: 42, growth: 22, regionStrength: { 'Asia & Pacific': 1.3, 'Europe': 1.2, 'Arab States': 1.1 } },
+    { name: 'Quantum Computing Pilots', category: 'innovation', baseFrequency: 18, growth: 40, regionStrength: { 'Europe': 1.3, 'Asia & Pacific': 1.2, 'North America': 1.3 } },
 
     // Governance Models
-    { name: 'National-Local Alignment', category: 'governance', baseFrequency: 72, growth: 47, regionStrength: { 'Africa': 1.4, 'LATAM': 1.3, 'Asia': 1.3, 'Middle East': 1.1, 'Europe': 1.0, 'North America': 0.9, 'Australia & Oceania': 0.9 } },
+    { name: 'National-Local Alignment', category: 'governance', baseFrequency: 72, growth: 47, regionStrength: { 'Africa': 1.4, 'Latin America & Caribbean': 1.3, 'Asia & Pacific': 1.1, 'Arab States': 1.1, 'Europe': 1.0, 'North America': 0.9 } },
     { name: 'Platform Cooperatives', category: 'governance', baseFrequency: 62, growth: 12, regionStrength: { 'Europe': 1.3, 'North America': 1.1 } },
-    { name: 'Agile Regulation', category: 'governance', baseFrequency: 35, growth: 38, regionStrength: { 'Asia': 1.4, 'Europe': 1.2, 'North America': 1.1 } },
-    { name: 'Predictive Governance', category: 'governance', baseFrequency: 68, growth: 25, regionStrength: { 'Europe': 1.3, 'Asia': 1.2, 'North America': 1.1 } },
+    { name: 'Agile Regulation', category: 'governance', baseFrequency: 35, growth: 38, regionStrength: { 'Asia & Pacific': 1.4, 'Europe': 1.2, 'North America': 1.1 } },
+    { name: 'Predictive Governance', category: 'governance', baseFrequency: 68, growth: 25, regionStrength: { 'Europe': 1.3, 'Asia & Pacific': 1.2, 'North America': 1.1 } },
 
     // Finance & Economics
-    { name: 'Social Impact Bonds', category: 'finance', baseFrequency: 40, growth: 32, regionStrength: { 'Africa': 1.3, 'LATAM': 1.2, 'Europe': 1.1 } },
-    { name: 'Tokenized Carbon Credits', category: 'finance', baseFrequency: 50, growth: 28, regionStrength: { 'Europe': 1.4, 'Asia': 1.2, 'Middle East': 1.1 } },
-    { name: 'Community Wealth Building', category: 'finance', baseFrequency: 38, growth: 20, regionStrength: { 'Europe': 1.3, 'LATAM': 1.2, 'North America': 1.1 } },
+    { name: 'Social Impact Bonds', category: 'finance', baseFrequency: 40, growth: 32, regionStrength: { 'Africa': 1.3, 'Latin America & Caribbean': 1.2, 'Europe': 1.1 } },
+    { name: 'Tokenized Carbon Credits', category: 'finance', baseFrequency: 50, growth: 28, regionStrength: { 'Europe': 1.4, 'Asia & Pacific': 1.2, 'Arab States': 1.1 } },
+    { name: 'Community Wealth Building', category: 'finance', baseFrequency: 38, growth: 20, regionStrength: { 'Europe': 1.3, 'Latin America & Caribbean': 1.2, 'North America': 1.1 } },
   ];
 
   // Regional growth modifiers — regions strong in a theme grow faster there
   const regionGrowthModifiers: Record<string, number> = {
-    'LATAM': 1.25, 'Africa': 1.30, 'Middle East': 1.15,
-    'Asia': 1.10, 'Europe': 0.85, 'North America': 0.80, 'Australia & Oceania': 0.90,
+    'Latin America & Caribbean': 1.25, 'Africa': 1.30, 'Arab States': 1.15,
+    'Asia & Pacific': 1.00, 'Europe': 0.85, 'North America': 0.80,
   };
 
   // Calculate theme data by region
@@ -214,7 +214,7 @@ export function EmergingThematicAnalysis() {
               VLR-VNR alignment and multi-level governance coherence are accelerating as cities and national governments seek to bridge the implementation gap through coordinated reporting and shared accountability frameworks.
             </p>
             <div className="flex flex-col gap-1 text-xs text-slate-500">
-              <span><strong className="text-slate-700">Strongest in:</strong> Africa, LATAM, Asia</span>
+              <span><strong className="text-slate-700">Strongest in:</strong> Africa, Latin America & Caribbean, Asia & Pacific</span>
             </div>
           </div>
           <div className="bg-white rounded-2xl shadow-sm border border-slate-200/60 p-6 border-l-4" style={{ borderLeftColor: '#f59e0b' }}>
@@ -227,7 +227,7 @@ export function EmergingThematicAnalysis() {
               Cities are increasingly centring adequate housing as a cross-cutting priority, aligned with SDG 11.1's target of ensuring access for all to adequate, safe, and affordable housing.
             </p>
             <div className="flex flex-col gap-1 text-xs text-slate-500">
-              <span><strong className="text-slate-700">Strongest in:</strong> Africa, LATAM, Asia, Middle East</span>
+              <span><strong className="text-slate-700">Strongest in:</strong> Africa, Latin America & Caribbean, Asia & Pacific, Arab States</span>
             </div>
           </div>
         </div>
@@ -240,7 +240,7 @@ export function EmergingThematicAnalysis() {
               Regional Theme Growth Matrix: Where Innovation Is Accelerating
             </h3>
             <p className="text-sm text-slate-600">
-              Growth rates by theme and region &bull; Darker colors indicate faster-growing themes &bull; Africa &amp; LATAM lead 4 of 5 fastest-growing themes
+              Growth rates by theme and region &bull; Darker colors indicate faster-growing themes &bull; Africa &amp; Latin America &amp; Caribbean lead 4 of 5 fastest-growing themes
             </p>
           </div>
 
@@ -431,7 +431,7 @@ export function EmergingThematicAnalysis() {
             <div className="mt-6 p-4 bg-slate-50 rounded-lg border-l-4 border-blue-500">
               <div className="text-xs text-slate-600">
                 <strong>Insight:</strong> National-Local Alignment and Adequate Housing & Basic Services lead the top 5 as critical emerging priorities.
-                Global South regions (Africa, LATAM) drive 4 of the 5 fastest-growing themes, signaling a paradigm shift toward multi-level governance coherence and housing equity.
+                Global South regions (Africa, Latin America & Caribbean) drive 4 of the 5 fastest-growing themes, signaling a paradigm shift toward multi-level governance coherence and housing equity.
               </div>
             </div>
           </div>

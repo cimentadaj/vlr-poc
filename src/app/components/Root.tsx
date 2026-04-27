@@ -15,13 +15,35 @@ export function Root() {
   return (
     <div className="h-full flex flex-col">
       <AccessGate />
-      {/* Navigation */}
-      <nav className="bg-white border-b border-slate-200 px-6 py-4">
+      {/* Navigation — cream bar matching nexusgovernance.eu */}
+      <nav
+        className="border-b px-6 py-4"
+        style={{ background: '#F5F5F2', borderColor: 'rgba(35, 53, 84, 0.12)' }}
+      >
         <div className="max-w-7xl mx-auto flex items-center gap-8">
-          <div>
-            <div className="text-xl font-bold text-slate-900">VLR Intelligence Platform</div>
-            <div className="text-xs text-slate-500">Urban Governance Insights from Voluntary Local Reviews</div>
-          </div>
+          <a
+            href="https://nexusgovernance.eu/"
+            className="flex items-center gap-4 no-underline shrink-0"
+            style={{ color: '#233554' }}
+          >
+            <span
+              className="text-[22px] font-bold leading-none"
+              style={{ fontFamily: '"Libre Baskerville", Georgia, "Times New Roman", serif', letterSpacing: '-0.01em' }}
+            >
+              Nexus
+            </span>
+            <span
+              aria-hidden="true"
+              className="block w-px h-5"
+              style={{ background: 'rgba(35, 53, 84, 0.25)' }}
+            ></span>
+            <span
+              className="text-[13px] font-medium"
+              style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif', color: '#0F1C2E', opacity: 0.75, letterSpacing: '0.02em' }}
+            >
+              Compendium
+            </span>
+          </a>
           <div className="flex gap-2">
             <Link
               to="/"

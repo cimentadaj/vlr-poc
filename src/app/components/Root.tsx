@@ -1,5 +1,6 @@
 import { Link, Outlet, useLocation } from 'react-router';
 import { LayoutDashboard, BarChart3, FileText, AlertTriangle, Target } from 'lucide-react';
+import { AccessGate } from './AccessGate';
 
 export function Root() {
   const location = useLocation();
@@ -13,6 +14,7 @@ export function Root() {
 
   return (
     <div className="h-full flex flex-col">
+      <AccessGate />
       {/* Navigation */}
       <nav className="bg-white border-b border-slate-200 px-6 py-4">
         <div className="max-w-7xl mx-auto flex items-center gap-8">

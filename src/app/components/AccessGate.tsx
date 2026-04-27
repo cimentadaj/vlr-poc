@@ -19,7 +19,8 @@ function readGrant(): boolean {
 export function AccessGate() {
   const [granted, setGranted] = useState<boolean>(readGrant);
   const [errors, setErrors] = useState<{ [k: string]: string }>({});
-  const [consent, setConsent] = useState<boolean>(false);
+  const [consentOutreach, setConsentOutreach] = useState<boolean>(false);
+  const [consentMarketing, setConsentMarketing] = useState<boolean>(false);
   const firstFieldRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
@@ -47,7 +48,7 @@ export function AccessGate() {
     if (!email) next.email = 'Required.';
     else if (!EMAIL_RE.test(email)) next.email = 'Enter a valid email address.';
     if (!organisation) next.organisation = 'Required.';
-    if (!consent) next.consent = 'Please confirm the statement below to continue.';
+    if (!consentOutreach) next.consentOutreach = 'Please confirm the first statement below to continue.';
     setErrors(next);
     if (Object.keys(next).length > 0) return;
 
@@ -55,7 +56,8 @@ export function AccessGate() {
       full_name,
       email,
       organisation,
-      consent_marketing: consent,
+      consent_outreach: consentOutreach,
+      consent_marketing: consentMarketing,
       source: 'observatory',
       website,
     };
@@ -178,34 +180,54 @@ export function AccessGate() {
             )}
           </div>
 
+          {/* Required: outreach consent — gates the submission. */}
           <div className="space-y-1.5 pt-2">
             <div className="flex items-start gap-3">
               <Checkbox
-                id="consent_marketing"
-                checked={consent}
-                onCheckedChange={(v) => setConsent(v === true)}
-                aria-invalid={!!errors.consent || undefined}
+                id="consent_outreach"
+                checked={consentOutreach}
+                onCheckedChange={(v) => setConsentOutreach(v === true)}
+                aria-invalid={!!errors.consentOutreach || undefined}
+                aria-required="true"
                 className="mt-0.5"
               />
               <Label
-                htmlFor="consent_marketing"
+                htmlFor="consent_outreach"
                 className="text-xs leading-relaxed text-slate-600 font-normal cursor-pointer"
               >
-                I agree to receive occasional updates from Nexus Governance about the
-                Compendium, methodology revisions, and related work. I can withdraw at
-                any time by writing to{' '}
-                <a
-                  href="mailto:hello@nexusgovernance.eu"
-                  className="text-blue-700 underline-offset-2 hover:underline"
-                >
-                  hello@nexusgovernance.eu
-                </a>
-                .
+                I agree to be contacted by Nexus Governance about how I'm using the
+                Compendium and the use cases it supports.
               </Label>
             </div>
-            {errors.consent && (
-              <p className="text-xs text-red-600 pl-7">{errors.consent}</p>
+            {errors.consentOutreach && (
+              <p className="text-xs text-red-600 pl-7">{errors.consentOutreach}</p>
             )}
+          </div>
+
+          {/* Optional: marketing consent. */}
+          <div className="flex items-start gap-3">
+            <Checkbox
+              id="consent_marketing"
+              checked={consentMarketing}
+              onCheckedChange={(v) => setConsentMarketing(v === true)}
+              className="mt-0.5"
+            />
+            <Label
+              htmlFor="consent_marketing"
+              className="text-xs leading-relaxed text-slate-600 font-normal cursor-pointer"
+            >
+              <span className="font-medium text-slate-500">(Optional)</span>{' '}
+              I agree to receive occasional updates from Nexus Governance about the
+              Compendium, methodology revisions, and related work. I can withdraw at
+              any time by writing to{' '}
+              <a
+                href="mailto:hello@nexusgovernance.eu"
+                className="text-blue-700 underline-offset-2 hover:underline"
+              >
+                hello@nexusgovernance.eu
+              </a>
+              .
+            </Label>
           </div>
 
           <p className="text-[11px] leading-relaxed text-slate-500 pt-1">

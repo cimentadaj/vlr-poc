@@ -180,7 +180,8 @@ export function AccessGate() {
             )}
           </div>
 
-          {/* Required: outreach consent — gates the submission. */}
+          {/* Required: acceptance of access conditions (contractual basis,
+              not marketing consent — see the description that follows). */}
           <div className="space-y-1.5 pt-2">
             <div className="flex items-start gap-3">
               <Checkbox
@@ -195,8 +196,7 @@ export function AccessGate() {
                 htmlFor="consent_outreach"
                 className="text-xs leading-relaxed text-slate-600 font-normal cursor-pointer"
               >
-                I agree to be contacted by Nexus Governance about how I'm using the
-                Compendium and the use cases it supports.
+                I accept the access conditions described below.
               </Label>
             </div>
             {errors.consentOutreach && (
@@ -204,7 +204,28 @@ export function AccessGate() {
             )}
           </div>
 
-          {/* Optional: marketing consent. */}
+          {/* Operational fineprint — describes the access conditions the
+              user is accepting in the box above. Frames the contact as
+              operational/research, not marketing, and names the legal
+              basis (contract / legitimate interest, not consent for
+              marketing purposes). */}
+          <p className="text-[11px] leading-relaxed text-slate-500 pl-7">
+            Nexus Governance stores the details you provide to manage your
+            access, and may contact you about your use of the Compendium and
+            the use cases it supports — for feedback, research, and partnership
+            purposes, not marketing. We do not share your details with third
+            parties. To withdraw access or request deletion of your details at
+            any time, email{' '}
+            <a
+              href="mailto:hello@nexusgovernance.eu"
+              className="text-blue-700 underline-offset-2 hover:underline"
+            >
+              hello@nexusgovernance.eu
+            </a>
+            .
+          </p>
+
+          {/* Optional: marketing consent — separately opted in. */}
           <div className="flex items-start gap-3">
             <Checkbox
               id="consent_marketing"
@@ -217,9 +238,9 @@ export function AccessGate() {
               className="text-xs leading-relaxed text-slate-600 font-normal cursor-pointer"
             >
               <span className="font-medium text-slate-500">(Optional)</span>{' '}
-              I agree to receive occasional updates from Nexus Governance about the
-              Compendium, methodology revisions, and related work. I can withdraw at
-              any time by writing to{' '}
+              I agree to receive occasional updates from Nexus Governance about
+              the Compendium, methodology revisions, and related work. I can
+              withdraw at any time by writing to{' '}
               <a
                 href="mailto:hello@nexusgovernance.eu"
                 className="text-blue-700 underline-offset-2 hover:underline"
@@ -229,11 +250,6 @@ export function AccessGate() {
               .
             </Label>
           </div>
-
-          <p className="text-[11px] leading-relaxed text-slate-500 pt-1">
-            By continuing you accept that your details are stored to manage access.
-            We do not share them with third parties.
-          </p>
 
           <button
             type="submit"

@@ -237,8 +237,7 @@ export function AccessGate() {
               htmlFor="consent_marketing"
               className="text-xs leading-relaxed text-slate-600 font-normal cursor-pointer"
             >
-              <span className="font-medium text-slate-500">(Optional)</span>{' '}
-              I agree to receive occasional updates from Nexus Governance about
+              (Optional) I agree to receive occasional updates from Nexus Governance about
               the Compendium, methodology revisions, and related work. I can
               withdraw at any time by writing to{' '}
               <a

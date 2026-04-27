@@ -5,6 +5,7 @@ import { SDGCoverageAnalysis } from '@/app/components/SDGCoverageAnalysis';
 import { PolicyRecommendationSynthesis } from '@/app/components/PolicyRecommendationSynthesis';
 import { ChallengesBarriersAnalysis } from '@/app/components/ChallengesBarriersAnalysis';
 import { CommitmentStatementsAnalysis } from '@/app/components/CommitmentStatementsAnalysis';
+import { Methodology } from '@/app/components/Methodology';
 
 // HashRouter is used because the app is served as a subdirectory of a
 // custom-domain GitHub Pages site (nexusgovernance.eu/vlr-observatory/), and
@@ -21,6 +22,7 @@ export const router = createHashRouter([
       { path: 'policy-actions', Component: PolicyRecommendationSynthesis },
       { path: 'challenges-barriers', Component: ChallengesBarriersAnalysis },
       { path: 'commitment-statements', Component: CommitmentStatementsAnalysis },
+      { path: 'methodology', Component: Methodology },
     ],
   },
 ]);

@@ -101,6 +101,16 @@ export function Root() {
               Commitments
             </Link>
           </div>
+          <Link
+            to="/methodology"
+            className={`ml-auto text-xs tracking-wide transition-colors ${
+              isActive('/methodology')
+                ? 'text-slate-900'
+                : 'text-slate-500 hover:text-slate-900'
+            }`}
+          >
+            Methodology
+          </Link>
         </div>
       </nav>
 

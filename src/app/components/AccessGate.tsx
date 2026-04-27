@@ -47,6 +47,7 @@ export function AccessGate() {
     if (!email) next.email = 'Required.';
     else if (!EMAIL_RE.test(email)) next.email = 'Enter a valid email address.';
     if (!organisation) next.organisation = 'Required.';
+    if (!consent) next.consent = 'Please confirm the statement below to continue.';
     setErrors(next);
     if (Object.keys(next).length > 0) return;
 
@@ -177,28 +178,34 @@ export function AccessGate() {
             )}
           </div>
 
-          <div className="flex items-start gap-3 pt-2">
-            <Checkbox
-              id="consent_marketing"
-              checked={consent}
-              onCheckedChange={(v) => setConsent(v === true)}
-              className="mt-0.5"
-            />
-            <Label
-              htmlFor="consent_marketing"
-              className="text-xs leading-relaxed text-slate-600 font-normal cursor-pointer"
-            >
-              I agree to receive occasional updates from Nexus Governance about the
-              Compendium, methodology revisions, and related work. I can withdraw at
-              any time by writing to{' '}
-              <a
-                href="mailto:hello@nexusgovernance.eu"
-                className="text-blue-700 underline-offset-2 hover:underline"
+          <div className="space-y-1.5 pt-2">
+            <div className="flex items-start gap-3">
+              <Checkbox
+                id="consent_marketing"
+                checked={consent}
+                onCheckedChange={(v) => setConsent(v === true)}
+                aria-invalid={!!errors.consent || undefined}
+                className="mt-0.5"
+              />
+              <Label
+                htmlFor="consent_marketing"
+                className="text-xs leading-relaxed text-slate-600 font-normal cursor-pointer"
               >
-                hello@nexusgovernance.eu
-              </a>
-              .
-            </Label>
+                I agree to receive occasional updates from Nexus Governance about the
+                Compendium, methodology revisions, and related work. I can withdraw at
+                any time by writing to{' '}
+                <a
+                  href="mailto:hello@nexusgovernance.eu"
+                  className="text-blue-700 underline-offset-2 hover:underline"
+                >
+                  hello@nexusgovernance.eu
+                </a>
+                .
+              </Label>
+            </div>
+            {errors.consent && (
+              <p className="text-xs text-red-600 pl-7">{errors.consent}</p>
+            )}
           </div>
 
           <p className="text-[11px] leading-relaxed text-slate-500 pt-1">

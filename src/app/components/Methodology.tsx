@@ -102,15 +102,70 @@ export function Methodology() {
                 stage at which they can be detected.
               </p>
               <p>
-                Operationally, the pipeline acquires source material and basic
-                metadata; segments narrative into thematic sections, including
-                SDG-chapter recognition; extracts structured analytical units
-                under the verifiable-grounding requirement; classifies each unit
-                against an analytical taxonomy of policies, challenges, and
-                commitments; and validates the result against schema and
-                corpus-level quality signals. Tools, model choices, and storage
-                schema are internal and made available to partner institutions on
-                request for methodological review.
+                Operationally, the Compendium combines classical{' '}
+                <em>natural language processing</em> with{' '}
+                <em>large-language-model-assisted extraction</em> inside a
+                structured, audit-traceable pipeline. Each document moves through
+                five stages.
+              </p>
+              <p>
+                <strong>Acquisition and normalisation.</strong> Source documents
+                are obtained from the UN DESA repository and from direct-submission
+                and research channels, then converted from PDF into a structured,
+                machine-readable form with language and metadata detected at
+                ingest. Provenance — original document, page, paragraph — is
+                recorded against every downstream record.
+              </p>
+              <p>
+                <strong>Thematic segmentation.</strong> Documents are broken into
+                thematic sections using NLP-based segmentation, including explicit
+                SDG-chapter recognition. The boundary between a formally-structured
+                SDG chapter and narrative front-matter is the basis on which
+                content enters the per-SDG aggregate views.
+              </p>
+              <p>
+                <strong>Structured extraction.</strong> Within each thematic
+                section, large-language-model-assisted extraction identifies the
+                analytical units the Compendium reasons over: <em>policies</em>{' '}
+                (what governments report they are doing), <em>challenges</em>{' '}
+                (what they report stands in the way), and <em>commitments</em>{' '}
+                (what they pledge). Every extracted unit carries a verbatim
+                quotation from its source paragraph; that quotation is the
+                grounding contract — extractions that cannot reproduce their
+                evidence are dropped before they reach classification.
+              </p>
+              <p>
+                <strong>Classification.</strong> Each analytical unit is mapped
+                onto a stable taxonomy of policy instruments, challenge classes,
+                and commitment forms. The taxonomy is the Compendium's own
+                analytical instrument — versioned, peer-reviewable, and held
+                fixed across the corpus so that cross-city and cross-time
+                comparison remain interpretable. A confidence signal accompanies
+                each classification; low-confidence assignments enter a manual
+                review queue rather than being silently accepted.
+              </p>
+              <p>
+                <strong>Validation and corpus-level integrity checks.</strong>{' '}
+                Each document and the corpus as a whole are tested against a
+                battery of schema checks, coverage checks, and anomaly detectors
+                before any output is exposed to public views. Documents that fail
+                validation remain searchable but are excluded from aggregates
+                until reprocessed.
+              </p>
+              <p>
+                The combination is deliberate. Rule-based or keyword-based
+                extraction is inadequate to the linguistic, structural, and
+                multilingual heterogeneity of the global VLR corpus; large
+                language models alone, without verifiable grounding, a fixed
+                taxonomy, and graduated validation, produce fluent text without
+                the auditability that international-organisation use requires.
+                The Compendium pairs the two so that every extracted record is
+                at once analytically rich and provably grounded in its source.
+              </p>
+              <p>
+                Tools, model choices, prompt designs, and storage schema are
+                internal and made available to partner institutions on request
+                for methodological review.
               </p>
             </div>
           </section>

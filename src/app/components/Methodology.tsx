@@ -6,7 +6,7 @@ export function Methodology() {
       <article className="max-w-3xl mx-auto px-6 py-12 sm:px-8 sm:py-16">
         <div className="bg-white rounded-2xl border border-slate-200/60 shadow-sm p-8 sm:p-12">
           <div className="text-xs uppercase tracking-[0.18em] text-slate-500 mb-4">
-            Methodology · v2026-04-27
+            Methodology · v2026-04-30
           </div>
           <h1
             className="text-3xl sm:text-4xl font-bold text-slate-900 leading-tight mb-2"
@@ -23,8 +23,8 @@ export function Methodology() {
             narrative archive into a queryable, comparable evidence base. Every
             analytical claim it surfaces is bound to a verbatim passage in a
             specific public document. It is offered as a complement, not a
-            substitute, to the institutional infrastructure that already exists
-            around the Voluntary Local Review.
+            substitute, to the institutional infrastructure that UN DESA and
+            UN-Habitat have built around the Voluntary Local Review.
           </p>
 
           <section className="mb-10">
@@ -36,36 +36,46 @@ export function Methodology() {
             </h2>
             <div className="text-sm text-slate-700 leading-relaxed space-y-4">
               <p>
-                The Voluntary Local Review framework is curated by the United
-                Nations Department of Economic and Social Affairs (UN DESA), in
-                co-operation with UN-Habitat. UN DESA maintains the canonical
-                listing of submitted reviews; their{' '}
-                <em>Global Guiding Elements for VLRs</em> describe what a review
-                should address. The Compendium operates on the same corpus but
-                performs a different task: where UN DESA curates and showcases,
-                the Compendium structures and compares.
+                The Voluntary Local Review movement has been built and sustained
+                by the United Nations Department of Economic and Social Affairs
+                (UN DESA) and UN-Habitat, who together maintain the principal
+                repositories of submitted reviews and have issued the foundational
+                guidance for them — including the{' '}
+                <em>Global Guiding Elements for Voluntary Local Reviews</em>. The
+                Compendium is built on top of that institutional infrastructure:
+                it takes the corpus UN DESA and UN-Habitat have assembled and
+                curated, and adds a structured analytical layer that lets the
+                evidence inside the corpus be read at scale and across
+                jurisdictions.
               </p>
               <p>
-                It is also distinct from the{' '}
+                The Compendium also complements the{' '}
                 <em>
                   Global indicator framework for the Sustainable Development
                   Goals
                 </em>{' '}
                 (UN General Assembly resolution A/RES/71/313), the statistical
-                backbone of SDG monitoring. That framework counts; the Compendium
-                reads. Narrative governance content — institutional arrangements,
-                policy coherence, political will — is not reducible to a Tier I /
-                II / III indicator, and the two regimes answer complementary
-                questions. The Compendium is also separate from the Voluntary
-                National Reviews presented at the High-Level Political Forum,
-                which operate at national rather than sub-national level.
+                backbone of SDG monitoring. Where the indicator framework provides
+                quantitative, internationally comparable measures of progress, the
+                Compendium adds a narrative-evidence layer to that backbone —
+                institutional arrangements, policy coherence, stakeholder
+                engagement, political will — drawn from what cities themselves
+                articulate in their reviews. Read together, the two layers offer
+                a fuller picture of sub-national SDG implementation than either
+                does alone.
               </p>
               <p>
-                It is not a substitute for academic literature reviews of VLRs
-                either. Those select a sample, read it qualitatively, and
-                synthesise. The Compendium reads the full population, structures
-                it against a stable schema, and exposes it at the unit of
-                analysis — city × SDG × year × extracted item.
+                Academic literature reviews of VLRs and the broader case-study
+                tradition have done — and continue to do — important work in
+                advancing comparative understanding of sub-national SDG
+                implementation, by reading documents closely and synthesising
+                lessons across selected jurisdictions. The Compendium is inspired
+                by that work and seeks to extend its reach: it scales the same
+                comparative impulse to a meta-analysis of the full VLR corpus,
+                structuring it against a stable schema so that patterns, regional
+                signatures, and trends across time can be identified at the level
+                of an individual extracted item — city × SDG × year — and across
+                the corpus as a whole.
               </p>
             </div>
           </section>
@@ -110,8 +120,9 @@ export function Methodology() {
               </p>
               <p>
                 <strong>Acquisition and normalisation.</strong> Source documents
-                are obtained from the UN DESA repository and from direct-submission
-                and research channels, then converted from PDF into a structured,
+                are obtained from the UN DESA and UN-Habitat repositories and
+                from direct-submission and research channels, then converted from
+                PDF into a structured,
                 machine-readable form with language and metadata detected at
                 ingest. Provenance — original document, page, paragraph — is
                 recorded against every downstream record.
@@ -184,12 +195,13 @@ export function Methodology() {
                 The patterns it surfaces are those already present in what cities
                 have written; silences are evidence that cities do not report on
                 something, not direct evidence of absence in practice — a
-                property of the source material shared with UN DESA's listing
-                itself.
+                property of the source material shared with the UN DESA and
+                UN-Habitat repositories themselves.
               </p>
               <p>
                 Coverage is reported transparently with each public view: the
-                ingestion gap against the UN DESA repository, the proportion of
+                ingestion gap against the UN DESA and UN-Habitat repositories,
+                the proportion of
                 documents with structurally complete SDG segmentation, and the
                 fifteen languages currently processed. Aggregates respect the six
                 UN-Habitat regional groupings and are not directly interchangeable
@@ -207,12 +219,13 @@ export function Methodology() {
             </h2>
             <div className="text-sm text-slate-700 leading-relaxed">
               <p>
-                Methodological review by partner institutions — UN DESA,
-                UN-Habitat, the OECD, the World Bank, national planning ministries
-                — is welcomed on three fronts: corpus reconciliation with the UN
-                DESA listing, peer review of the analytical taxonomy, and
-                independent audit of the verifiable-grounding guarantee. Requests
-                may be addressed to{' '}
+                We welcome engagement from international organisations, national
+                and sub-national governments, research institutions, and city
+                networks who share an interest in this work. There are several
+                practical ways to collaborate: contributing Voluntary Local
+                Reviews to the corpus, reviewing the methodology and analytical
+                framework with us, or developing joint analyses around questions
+                you care about. To start a conversation, write to{' '}
                 <a
                   href="mailto:hello@nexusgovernance.eu"
                   className="text-blue-700 hover:underline underline-offset-2"
@@ -230,7 +243,7 @@ export function Methodology() {
               Nexus Compendium: a structured meta-reading of the Voluntary Local
               Review corpus — Methodology.
             </em>{' '}
-            v2026-04-27.{' '}
+            v2026-04-30.{' '}
             <a
               href="https://nexusgovernance.eu/governance-scan"
               className="text-slate-600 hover:underline underline-offset-2"

@@ -104,14 +104,14 @@ export function AccessGate() {
           id="access-gate-title"
           className="text-2xl font-semibold leading-tight text-slate-900 sm:text-[28px]"
         >
-          Open the Nexus Compendium
+          Open Nexus SDG Intelligence
         </h2>
         <p
           id="access-gate-description"
           className="mt-3 text-sm leading-relaxed text-slate-600"
         >
           A short identification step before continuing. Your details support how we
-          measure reach and stay in touch with the institutions using the Compendium.
+          measure reach and stay in touch with the institutions using Nexus SDG Intelligence.
         </p>
 
         <form onSubmit={onSubmit} noValidate className="mt-7 space-y-4">
@@ -211,7 +211,7 @@ export function AccessGate() {
               marketing purposes). */}
           <p className="text-[11px] leading-relaxed text-slate-500 pl-7">
             Nexus Governance stores the details you provide to manage your
-            access, and may contact you about your use of the Compendium and
+            access, and may contact you about your use of Nexus SDG Intelligence and
             the use cases it supports — for feedback, research, and partnership
             purposes, not marketing. We do not share your details with third
             parties. To withdraw access or request deletion of your details at
@@ -239,7 +239,7 @@ export function AccessGate() {
             >
               <span>
                 (Optional) I agree to receive occasional updates from Nexus Governance about
-                the Compendium, methodology revisions, and related work. I can
+                Nexus SDG Intelligence, methodology revisions, and related work. I can
                 withdraw at any time by writing to{' '}
                 <a
                   href="mailto:hello@nexusgovernance.eu"
@@ -256,7 +256,7 @@ export function AccessGate() {
             type="submit"
             className="mt-2 inline-flex h-12 w-full items-center justify-center rounded-md bg-blue-700 px-6 text-sm font-medium tracking-wide text-white transition hover:bg-blue-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
           >
-            Continue to the Compendium →
+            Continue to Nexus SDG Intelligence →
           </button>
         </form>
       </div>

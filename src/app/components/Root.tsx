@@ -41,7 +41,7 @@ export function Root() {
               className="text-[13px] font-medium"
               style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif', color: '#0F1C2E', opacity: 0.75, letterSpacing: '0.02em' }}
             >
-              Compendium
+              SDG Intelligence
             </span>
           </a>
           <div className="flex gap-2">

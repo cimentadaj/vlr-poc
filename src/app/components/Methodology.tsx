@@ -12,14 +12,14 @@ export function Methodology() {
             className="text-3xl sm:text-4xl font-bold text-slate-900 leading-tight mb-2"
             style={{ fontFamily: SERIF, letterSpacing: '-0.01em' }}
           >
-            Nexus Compendium
+            Nexus SDG Intelligence
           </h1>
           <p className="text-base text-slate-600 mb-8 leading-relaxed">
             A structured meta-reading of the world's Voluntary Local Reviews.
           </p>
 
           <p className="text-sm sm:text-base text-slate-700 leading-relaxed italic border-l-2 border-slate-300 pl-4 mb-10">
-            The Compendium converts the global VLR corpus from a heterogeneous
+            Nexus SDG Intelligence converts the global VLR corpus from a heterogeneous
             narrative archive into a queryable, comparable evidence base. Every
             analytical claim it surfaces is bound to a verbatim passage in a
             specific public document. It is offered as a complement, not a
@@ -41,23 +41,25 @@ export function Methodology() {
                 (UN DESA) and UN-Habitat, who together maintain the principal
                 repositories of submitted reviews and have issued the foundational
                 guidance for them — including the{' '}
-                <em>Global Guiding Elements for Voluntary Local Reviews</em>. The
-                Compendium is built on top of that institutional infrastructure:
+                <em>Global Guiding Elements for Voluntary Local Reviews</em>.
+                Nexus SDG Intelligence is built on top of that institutional
+                infrastructure:
                 it takes the corpus UN DESA and UN-Habitat have assembled and
                 curated, and adds a structured analytical layer that lets the
                 evidence inside the corpus be read at scale and across
                 jurisdictions.
               </p>
               <p>
-                The Compendium also complements the{' '}
+                Nexus SDG Intelligence also complements the{' '}
                 <em>
                   Global indicator framework for the Sustainable Development
                   Goals
                 </em>{' '}
                 (UN General Assembly resolution A/RES/71/313), the statistical
                 backbone of SDG monitoring. Where the indicator framework provides
-                quantitative, internationally comparable measures of progress, the
-                Compendium adds a narrative-evidence layer to that backbone —
+                quantitative, internationally comparable measures of progress,
+                Nexus SDG Intelligence adds a narrative-evidence layer to that
+                backbone —
                 institutional arrangements, policy coherence, stakeholder
                 engagement, political will — drawn from what cities themselves
                 articulate in their reviews. Read together, the two layers offer
@@ -69,7 +71,7 @@ export function Methodology() {
                 tradition have done — and continue to do — important work in
                 advancing comparative understanding of sub-national SDG
                 implementation, by reading documents closely and synthesising
-                lessons across selected jurisdictions. The Compendium is inspired
+                lessons across selected jurisdictions. Nexus SDG Intelligence is inspired
                 by that work and seeks to extend its reach: it scales the same
                 comparative impulse to a meta-analysis of the full VLR corpus,
                 structuring it against a stable schema so that patterns, regional
@@ -89,7 +91,7 @@ export function Methodology() {
             </h2>
             <div className="text-sm text-slate-700 leading-relaxed space-y-4">
               <p>
-                The Compendium is built on three principles, applied identically
+                Nexus SDG Intelligence is built on three principles, applied identically
                 to every document in the corpus.
               </p>
               <p>
@@ -112,7 +114,7 @@ export function Methodology() {
                 stage at which they can be detected.
               </p>
               <p>
-                Operationally, the Compendium combines classical{' '}
+                Operationally, Nexus SDG Intelligence combines classical{' '}
                 <em>natural language processing</em> with{' '}
                 <em>large-language-model-assisted extraction</em> inside a
                 structured, audit-traceable pipeline. Each document moves through
@@ -137,7 +139,7 @@ export function Methodology() {
               <p>
                 <strong>Structured extraction.</strong> Within each thematic
                 section, large-language-model-assisted extraction identifies the
-                analytical units the Compendium reasons over: <em>policies</em>{' '}
+                analytical units Nexus SDG Intelligence reasons over: <em>policies</em>{' '}
                 (what governments report they are doing), <em>challenges</em>{' '}
                 (what they report stands in the way), and <em>commitments</em>{' '}
                 (what they pledge). Every extracted unit carries a verbatim
@@ -148,7 +150,7 @@ export function Methodology() {
               <p>
                 <strong>Classification.</strong> Each analytical unit is mapped
                 onto a stable taxonomy of policy instruments, challenge classes,
-                and commitment forms. The taxonomy is the Compendium's own
+                and commitment forms. The taxonomy is Nexus SDG Intelligence's own
                 analytical instrument — versioned, peer-reviewable, and held
                 fixed across the corpus so that cross-city and cross-time
                 comparison remain interpretable. A confidence signal accompanies
@@ -170,7 +172,7 @@ export function Methodology() {
                 language models alone, without verifiable grounding, a fixed
                 taxonomy, and graduated validation, produce fluent text without
                 the auditability that international-organisation use requires.
-                The Compendium pairs the two so that every extracted record is
+                Nexus SDG Intelligence pairs the two so that every extracted record is
                 at once analytically rich and provably grounded in its source.
               </p>
               <p>
@@ -186,7 +188,7 @@ export function Methodology() {
               className="text-xl font-semibold text-slate-900 mb-3"
               style={{ fontFamily: SERIF }}
             >
-              3. What the Compendium does not do
+              3. What Nexus SDG Intelligence does not do
             </h2>
             <div className="text-sm text-slate-700 leading-relaxed space-y-4">
               <p>
@@ -240,7 +242,7 @@ export function Methodology() {
           <div className="border-t border-slate-200 pt-6 mt-12 text-xs text-slate-500 leading-relaxed">
             Cite as: Nexus Governance.{' '}
             <em>
-              Nexus Compendium: a structured meta-reading of the Voluntary Local
+              Nexus SDG Intelligence: a structured meta-reading of the Voluntary Local
               Review corpus — Methodology.
             </em>{' '}
             v2026-04-30.{' '}

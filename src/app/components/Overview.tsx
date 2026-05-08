@@ -65,7 +65,6 @@ const commitmentIdToColor: Record<string, string> = Object.fromEntries(
 
 // Catch-all category IDs that should be excluded from distinctiveness ranking
 const CATCH_ALL_CATEGORY_IDS = new Set([
-  'socioeconomic',
   'other_challenge',
   'other_policy',
   'other_commitment',
@@ -145,14 +144,20 @@ function shortLabelFor(sig: Omit<Signature, 'region' | 'shortLabel'>): string {
   }
   // Map common category IDs to concise labels
   const shortLabels: Record<string, string> = {
-    fiscal_financial: 'Fiscal-constrained',
+    // Challenge categories
+    quality_of_life: 'Quality-of-life focused',
+    demographic_inequalities: 'Group-disparity focused',
+    labour_livelihood: 'Labour & livelihood pressures',
+    safety_violence: 'Safety & violence concerns',
+    environmental_hazards: 'Environmental exposure',
+    government_capacity: 'Government-capacity gaps',
     external_shocks: 'External shock exposed',
+    // Policy categories
     voluntary_partnership: 'Partnership-driven policy',
     strategic_planning: 'Strategy-led policy',
     public_investment: 'Investment-led policy',
     regulation_standards: 'Regulation-led policy',
-    data_monitoring: 'Data & monitoring gaps',
-    political_will: 'Political will risks',
+    // Commitment categories
     partnership_collaboration: 'Partnership commitments',
     capital_investment: 'Infrastructure commitments',
     regulatory_reform: 'Regulatory reform commitments',

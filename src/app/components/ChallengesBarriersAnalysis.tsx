@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 // recharts removed — slope chart is pure SVG
-import { Network, Shield, Database, DollarSign, Clock, Scale, BookOpen, Layers, Puzzle, Flag, MessageCircle, Zap, HeartHandshake, MoreHorizontal, Info } from 'lucide-react';
+import { Network, Clock, Zap, HeartHandshake, MoreHorizontal, Info, Users, Briefcase, ShieldAlert, Leaf, Building2 } from 'lucide-react';
 import { Tooltip as UITooltip, TooltipTrigger, TooltipContent } from './ui/tooltip';
 import type { LucideIcon } from 'lucide-react';
 import { REGIONS, CHALLENGE_CATEGORIES, ChallengeId, getSDGName } from './data/constants';
@@ -8,18 +8,14 @@ import challengeRaw from '@/data/generated/challenge-distribution.json';
 import temporalRaw from '@/data/generated/temporal-trends.json';
 
 const CHALLENGE_ICON_MAP: Record<ChallengeId, { icon: LucideIcon; shortName: string }> = {
-  fiscal_financial:        { icon: DollarSign,     shortName: 'Fiscal & Financial' },
-  institutional_governance:{ icon: Shield,         shortName: 'Governance' },
-  legal_regulatory:        { icon: Scale,          shortName: 'Legal & Regulatory' },
-  human_capacity:          { icon: BookOpen,       shortName: 'Human Capacity' },
-  data_monitoring:         { icon: Database,       shortName: 'Data & Monitoring' },
-  multilevel_governance:   { icon: Layers,         shortName: 'Multi-Level Gov.' },
-  policy_coherence:        { icon: Puzzle,         shortName: 'Policy Coherence' },
-  political_will:          { icon: Flag,           shortName: 'Political Will' },
-  stakeholder_engagement:  { icon: MessageCircle,  shortName: 'Stakeholders' },
-  external_shocks:         { icon: Zap,            shortName: 'External Shocks' },
-  socioeconomic:           { icon: HeartHandshake, shortName: 'Socioeconomic' },
-  other_challenge:         { icon: MoreHorizontal, shortName: 'Other' },
+  quality_of_life:           { icon: HeartHandshake, shortName: 'Quality of Life' },
+  demographic_inequalities:  { icon: Users,          shortName: 'Group Inequalities' },
+  labour_livelihood:         { icon: Briefcase,      shortName: 'Labour & Livelihood' },
+  safety_violence:           { icon: ShieldAlert,    shortName: 'Safety & Violence' },
+  environmental_hazards:     { icon: Leaf,           shortName: 'Environmental Hazards' },
+  government_capacity:       { icon: Building2,      shortName: 'Government Capacity' },
+  external_shocks:           { icon: Zap,            shortName: 'External Shocks' },
+  other_challenge:           { icon: MoreHorizontal, shortName: 'Other' },
 };
 
 type ChallengeItem = { sdgId: number; categoryId: string; region: string; year: number; count: number };
@@ -81,7 +77,7 @@ function buildTemporalEvolution() {
 const temporalEvolution = buildTemporalEvolution();
 
 export function ChallengesBarriersAnalysis() {
-  const [selectedChallenge, setSelectedChallenge] = useState<string>('fiscal_financial');
+  const [selectedChallenge, setSelectedChallenge] = useState<string>('quality_of_life');
   const [selectedRegion, setSelectedRegion] = useState<string>('All');
   const [hoveredSDG, setHoveredSDG] = useState<number | null>(null);
   const [hoveredSlope, setHoveredSlope] = useState<string | null>(null);

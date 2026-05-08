@@ -10,18 +10,14 @@ const OUT_DIR = join(__dirname, '..', 'src', 'data', 'generated');
 // Category tag mapping: DB category_tag string → frontend category ID
 // ---------------------------------------------------------------------------
 const CATEGORY_MAP = {
-  // Challenges
-  'Fiscal & Financial Constraints': 'fiscal_financial',
-  'Institutional & Governance Weaknesses': 'institutional_governance',
-  'Legal & Regulatory Gaps': 'legal_regulatory',
-  'Human Capacity & Technical Skills Deficits': 'human_capacity',
-  'Data Monitoring & Evidence Gaps': 'data_monitoring',
-  'Multi-Level Governance & Coordination Failures': 'multilevel_governance',
-  'Policy Coherence & Integration Deficits': 'policy_coherence',
-  'Political Will & Continuity Risks': 'political_will',
-  'Stakeholder Engagement & Participation Deficits': 'stakeholder_engagement',
+  // Challenges (7-category taxonomy from vlr_extraction/4_classify.py)
+  'Quality of Life & Access to Basic Services': 'quality_of_life',
+  'Demographic & Group-Based Inequalities': 'demographic_inequalities',
+  'Labour Market & Livelihood Problems': 'labour_livelihood',
+  'Safety, Violence & Social Cohesion': 'safety_violence',
+  'Environmental Hazards & Habitat Quality': 'environmental_hazards',
+  'Government Capacity & Coordination Failures': 'government_capacity',
   'External Shocks & Contextual Pressures': 'external_shocks',
-  'Socioeconomic Conditions & Inequality': 'socioeconomic',
   // Policies
   'Information, Awareness & Capacity Building': 'information_awareness',
   'Public Investment & Procurement': 'public_investment',

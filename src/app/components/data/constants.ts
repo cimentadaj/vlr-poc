@@ -43,20 +43,16 @@ export const REGIONS = [
 export type Region = (typeof REGIONS)[number];
 
 // ============================================================
-// Challenge Categories (12 categories from pipeline's 4_classify.py)
+// Challenge Categories (8 categories from pipeline's 4_classify.py)
 // ============================================================
 export const CHALLENGE_CATEGORIES = [
-  { id: 'fiscal_financial', name: 'Fiscal & Financial Constraints', color: '#ef4444', description: 'Insufficient government budgets, revenue shortfalls, donor dependency, or inability to mobilise private finance for public programmes.' },
-  { id: 'institutional_governance', name: 'Institutional & Governance Weaknesses', color: '#dc2626', description: 'Fragmented mandates, weak local agencies, unclear roles, or lack of enforcement capacity.' },
-  { id: 'legal_regulatory', name: 'Legal & Regulatory Gaps', color: '#f59e0b', description: 'Absent, outdated, or conflicting laws, by-laws, or regulatory frameworks.' },
-  { id: 'human_capacity', name: 'Human Capacity & Technical Skills Deficits', color: '#eab308', description: 'Shortage of trained staff, brain drain, or lack of specialised expertise.' },
-  { id: 'data_monitoring', name: 'Data Monitoring & Evidence Gaps', color: '#f97316', description: 'Missing baselines, unreliable statistics, or absence of monitoring infrastructure.' },
-  { id: 'multilevel_governance', name: 'Multi-Level Governance & Coordination Failures', color: '#8b5cf6', description: 'Misalignment between national and local governments, or poor inter-agency coordination.' },
-  { id: 'policy_coherence', name: 'Policy Coherence & Integration Deficits', color: '#a855f7', description: 'Siloed sectoral policies within a single level of government that contradict or ignore each other.' },
-  { id: 'political_will', name: 'Political Will & Continuity Risks', color: '#ec4899', description: 'Leadership turnover, shifting priorities, or lack of political commitment to long-term goals.' },
-  { id: 'stakeholder_engagement', name: 'Stakeholder Engagement & Participation Deficits', color: '#3b82f6', description: 'Insufficient inclusion of civil society, private sector, or marginalised groups in decision-making.' },
-  { id: 'external_shocks', name: 'External Shocks & Contextual Pressures', color: '#06b6d4', description: 'Climate disasters, pandemics, migration surges, or geopolitical disruptions beyond local control.' },
-  { id: 'socioeconomic', name: 'Socioeconomic Conditions & Inequality', color: '#10b981', description: 'Population-level problems such as poverty, health disparities, debt burdens, housing insecurity, educational gaps, or unequal outcomes across demographic groups.' },
+  { id: 'quality_of_life', name: 'Quality of Life & Access to Basic Services', color: '#10b981', description: 'Residents lacking access to or experiencing inadequate provision of basic public services and quality-of-life essentials — income/food/energy security, housing adequacy, health and well-being outcomes, learning and human-capital outcomes.' },
+  { id: 'demographic_inequalities', name: 'Demographic & Group-Based Inequalities', color: '#f97316', description: 'Unequal outcomes across demographic lines (gender, ethnicity, disability, migration status, age, rural/urban) where the disparity itself is the stated problem.' },
+  { id: 'labour_livelihood', name: 'Labour Market & Livelihood Problems', color: '#eab308', description: 'Adverse employment conditions facing residents: unemployment, youth joblessness, informality, precarious work, workplace injuries, or sectoral labour decline.' },
+  { id: 'safety_violence', name: 'Safety, Violence & Social Cohesion', color: '#dc2626', description: 'Victimisation, crime, violence, insecurity, stigma, or loneliness experienced by residents.' },
+  { id: 'environmental_hazards', name: 'Environmental Hazards & Habitat Quality', color: '#84cc16', description: 'Residents\' exposure to pollution, sanitation gaps, degraded ecosystems, unsafe or inadequate housing stock, or unreliable local infrastructure.' },
+  { id: 'government_capacity', name: 'Government Capacity & Coordination Failures', color: '#8b5cf6', description: 'Any government-internal barrier: insufficient budgets, missing data/baselines/monitoring, shortage of trained staff or expertise, fragmented mandates, weak institutions, missing/outdated laws, poor coordination across levels or sectors, weak stakeholder engagement, leadership turnover, lack of political will.' },
+  { id: 'external_shocks', name: 'External Shocks & Contextual Pressures', color: '#06b6d4', description: 'Climate disasters, pandemics, migration surges, geopolitical disruptions, or other context beyond local government control.' },
   { id: 'other_challenge', name: 'Other', color: '#94a3b8', description: 'Challenges that do not fit any category above or are too vague to classify.' },
 ] as const;
 

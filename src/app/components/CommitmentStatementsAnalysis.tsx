@@ -27,6 +27,7 @@ import type { LucideIcon } from 'lucide-react';
 import { REGIONS, COMMITMENT_CATEGORIES, CommitmentId, getSDGName } from './data/constants';
 import { Tooltip as UITooltip, TooltipTrigger, TooltipContent } from './ui/tooltip';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from './ui/tabs';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import commitmentRaw from '@/data/generated/commitment-distribution.json';
 import challengeRaw from '@/data/generated/challenge-distribution.json';
 
@@ -150,15 +151,16 @@ export function CommitmentStatementsAnalysis() {
               <Filter className="w-4 h-4 text-slate-600" />
               <span className="text-sm font-medium text-slate-700">Region:</span>
             </div>
-            <select
-              value={selectedRegion}
-              onChange={(e) => setSelectedRegion(e.target.value)}
-              className="px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              {allRegions.map(region => (
-                <option key={region} value={region}>{region}</option>
-              ))}
-            </select>
+            <Select value={selectedRegion} onValueChange={setSelectedRegion}>
+              <SelectTrigger className="h-auto w-auto min-w-[160px] rounded-lg border-slate-300 bg-white py-2 focus:ring-2 focus:ring-blue-500">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {allRegions.map(region => (
+                  <SelectItem key={region} value={region}>{region}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
         </div>
 

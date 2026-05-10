@@ -14,6 +14,7 @@ import {
 } from 'recharts';
 import { AlertCircle, TrendingUp, TrendingDown, Filter, ChevronDown } from 'lucide-react';
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from './ui/collapsible';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { getSDGName } from './data/constants';
 import coverageRaw from '@/data/generated/sdg-coverage.json';
 import metadataRaw from '@/data/generated/metadata.json';
@@ -246,27 +247,29 @@ export function SDGCoverageAnalysis() {
               <span className="text-sm font-medium text-slate-700">Filters:</span>
             </div>
 
-            <select
-              value={selectedRegion}
-              onChange={(e) => setSelectedRegion(e.target.value)}
-              className="px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="All">All Regions</option>
-              {regions.map(region => (
-                <option key={region} value={region}>{region}</option>
-              ))}
-            </select>
+            <Select value={selectedRegion} onValueChange={setSelectedRegion}>
+              <SelectTrigger className="h-auto w-auto min-w-[160px] rounded-lg border-slate-300 bg-white py-2 focus:ring-2 focus:ring-blue-500">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="All">All Regions</SelectItem>
+                {regions.map(region => (
+                  <SelectItem key={region} value={region}>{region}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
 
-            <select
-              value={selectedPeriod}
-              onChange={(e) => setSelectedPeriod(e.target.value)}
-              className="px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="All">All Years</option>
-              <option value="2016-2019">2016-2019 (Pre-COVID)</option>
-              <option value="2020-2021">2020-2021 (COVID)</option>
-              <option value="2022-2025">2022-2025 (Post-COVID)</option>
-            </select>
+            <Select value={selectedPeriod} onValueChange={setSelectedPeriod}>
+              <SelectTrigger className="h-auto w-auto min-w-[200px] rounded-lg border-slate-300 bg-white py-2 focus:ring-2 focus:ring-blue-500">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="All">All Years</SelectItem>
+                <SelectItem value="2016-2019">2016-2019 (Pre-COVID)</SelectItem>
+                <SelectItem value="2020-2021">2020-2021 (COVID)</SelectItem>
+                <SelectItem value="2022-2025">2022-2025 (Post-COVID)</SelectItem>
+              </SelectContent>
+            </Select>
 
             <div className="flex gap-2 ml-auto">
               <button

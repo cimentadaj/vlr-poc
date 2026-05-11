@@ -25,6 +25,7 @@ import {
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { REGIONS, COMMITMENT_CATEGORIES, CommitmentId, getSDGName } from './data/constants';
+import { useIsMobile } from '@/app/hooks/useIsMobile';
 import { Tooltip as UITooltip, TooltipTrigger, TooltipContent } from './ui/tooltip';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from './ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
@@ -96,6 +97,7 @@ function buildGapAnalysis(region: string) {
 export function CommitmentStatementsAnalysis() {
   const [selectedSDG, setSelectedSDG] = useState<number>(11);
   const [selectedRegion, setSelectedRegion] = useState<string>('All Regions');
+  const isMobile = useIsMobile();
 
   const selectedSDGData = useMemo(() => {
     const dist = getCommitmentDistribution(selectedSDG, selectedRegion);
@@ -174,7 +176,7 @@ export function CommitmentStatementsAnalysis() {
             <p className="text-sm text-slate-600 mb-4">
               Comparing the volume of identified challenges versus commitments across all SDGs
             </p>
-            <ResponsiveContainer width="100%" height={400}>
+            <ResponsiveContainer width="100%" height={isMobile ? 320 : 400}>
               <BarChart
                 data={[...gapAnalysis].filter(d => d.crr !== null).sort((a, b) => (a.crr as number) - (b.crr as number))}
                 layout="vertical"

@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef, useEffect } from 'react';
 import {
   BarChart,
   Bar,
@@ -182,6 +182,24 @@ export function PolicyRecommendationSynthesis() {
   }, [selectedSDG, recommendationTypeData]);
 
   const [hoveredSDG, setHoveredSDG] = useState<number | null>(null);
+  const detailRef = useRef<HTMLDivElement | null>(null);
+  const isInitialMount = useRef(true);
+
+  // Smooth-scroll to the detail panel when the user picks an SDG — but only
+  // if the panel is currently below the viewport. Skips the initial mount so
+  // we don't auto-scroll on first load (selectedSDG defaults to 11).
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+    if (selectedSDG === null || !detailRef.current) return;
+    const rect = detailRef.current.getBoundingClientRect();
+    const isBelowFold = rect.top > window.innerHeight - 100;
+    if (isBelowFold) {
+      detailRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [selectedSDG]);
 
   // Quadrant dividers (median X and Y across all SDG centroids)
   const medians = useMemo(() => {
@@ -385,7 +403,7 @@ export function PolicyRecommendationSynthesis() {
                 const description = QUADRANT_DESCRIPTION[quadrant];
 
                 const tooltipW = 340;
-                const tooltipH = 150;
+                const tooltipH = 145;
                 // Default: above the dot. Flip below if would clip plot top.
                 const desiredY = dotY - 16 - tooltipH;
                 const flipDown = desiredY < margin.top + 2;
@@ -431,6 +449,9 @@ export function PolicyRecommendationSynthesis() {
                         <div style={{ color: '#475569' }}>
                           {description}
                         </div>
+                        <div style={{ fontSize: 10, color: '#3b82f6', fontWeight: 600, marginTop: 6 }}>
+                          Click to view full breakdown →
+                        </div>
                       </div>
                     </foreignObject>
                   </g>
@@ -446,7 +467,7 @@ export function PolicyRecommendationSynthesis() {
 
         {/* Detail section for selected SDG */}
         {selectedSDG !== null && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          <div ref={detailRef} className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6 scroll-mt-4">
             {/* Left: Bar chart — absolute distribution for selected SDG */}
             <div className="bg-white rounded-2xl shadow-sm border border-slate-200/60 p-6">
               <h3 className="text-lg font-semibold text-slate-900 mb-1">

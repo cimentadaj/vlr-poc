@@ -10,3 +10,7 @@ dist/
 
 # Generated data (rebuilt from DB in CI)
 src/data/generated/
+
+# Responsive audit output (regenerated locally; harness itself is committed)
+responsive-audit/screenshots/
+responsive-audit/report.json

@@ -357,7 +357,7 @@ export function SDGCoverageAnalysis() {
                   SDG Coverage by Region
                 </h3>
                 <div className="mb-4">
-                  <div className="flex items-center gap-4 text-xs text-slate-600">
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-slate-600">
                     <span>Coverage:</span>
                     <div className="flex items-center gap-2">
                       <div className="w-4 h-4 rounded" style={{ backgroundColor: '#ef4444' }}></div>

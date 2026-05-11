@@ -1,4 +1,4 @@
-import { useState, useMemo, useRef, useEffect } from 'react';
+import { useState, useMemo, useRef } from 'react';
 import {
   BarChart,
   Bar,
@@ -184,23 +184,15 @@ export function PolicyRecommendationSynthesis() {
 
   const [hoveredSDG, setHoveredSDG] = useState<number | null>(null);
   const detailRef = useRef<HTMLDivElement | null>(null);
-  const isInitialMount = useRef(true);
 
-  // Smooth-scroll to the detail panel when the user picks an SDG — but only
-  // if the panel is currently below the viewport. Skips the initial mount so
-  // we don't auto-scroll on first load (selectedSDG defaults to 11).
-  useEffect(() => {
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-      return;
-    }
-    if (selectedSDG === null || !detailRef.current) return;
-    const rect = detailRef.current.getBoundingClientRect();
-    const isBelowFold = rect.top > window.innerHeight - 100;
-    if (isBelowFold) {
-      detailRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  }, [selectedSDG]);
+  // Explicit scroll handler, triggered ONLY by the user clicking the
+  // "View detailed breakdown" button in the side widget below.
+  // Clicking a scatterplot dot just updates `selectedSDG`; the page no
+  // longer auto-scrolls on every click (was disorienting on mobile).
+  const scrollToDetail = () => {
+    if (!detailRef.current) return;
+    detailRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   const isMobile = useIsMobile();
 
@@ -274,7 +266,8 @@ export function PolicyRecommendationSynthesis() {
             ))}
           </div>
 
-          <div className="flex justify-center">
+          <div className="flex flex-col lg:flex-row lg:items-start gap-6">
+            <div className="flex justify-center flex-1 min-w-0">
             <svg
               viewBox={`0 0 ${chartW} ${chartH}`}
               className="w-full max-w-3xl"
@@ -453,7 +446,7 @@ export function PolicyRecommendationSynthesis() {
                           {description}
                         </div>
                         <div style={{ fontSize: 10, color: '#3b82f6', fontWeight: 600, marginTop: 6 }}>
-                          Click to view full breakdown →
+                          Click to pin →
                         </div>
                       </div>
                     </foreignObject>
@@ -461,10 +454,64 @@ export function PolicyRecommendationSynthesis() {
                 );
               })()}
             </svg>
+            </div>
+
+            {/* Side widget — persistent details for the currently-selected dot.
+                On lg+ it sits to the right of the scatterplot; on smaller
+                viewports it drops below. Clicking the widget's button is the
+                ONLY way to auto-scroll to the breakdown — the dot click no
+                longer scrolls (was disorienting on mobile). */}
+            {selectedSDG !== null && (() => {
+              const sdg = scatterData.find(s => s.sdgId === selectedSDG);
+              if (!sdg) return null;
+              const point = activeRegion === 'All'
+                ? { x: sdg.cx, y: sdg.cy }
+                : sdg.regionalPoints.find(rp => rp.region === activeRegion) || { x: sdg.cx, y: sdg.cy };
+              const quadrant = getQuadrant(point.x, point.y, medians.medX, medians.medY);
+              const quadrantLabel = QUADRANT_LABEL[quadrant];
+              const description = QUADRANT_DESCRIPTION[quadrant];
+              const sdgColor = SDG_COLORS[sdg.sdgId];
+
+              return (
+                <div className="lg:w-72 lg:shrink-0 rounded-xl border border-slate-200 bg-slate-50 p-5">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span
+                      className="inline-flex items-center justify-center w-9 h-9 rounded-full text-sm font-bold text-white shrink-0"
+                      style={{ backgroundColor: sdgColor }}
+                    >
+                      {sdg.sdgId}
+                    </span>
+                    <div className="min-w-0">
+                      <div className="text-xs text-slate-500 uppercase tracking-wide">SDG {sdg.sdgId}</div>
+                      <div className="text-sm font-semibold text-slate-900 leading-tight">
+                        {sdg.name}
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="text-[11px] font-semibold uppercase tracking-wide mb-2"
+                    style={{ color: sdgColor }}
+                  >
+                    {quadrantLabel}
+                  </div>
+                  <p className="text-sm text-slate-600 leading-relaxed mb-4">
+                    {description}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={scrollToDetail}
+                    className="inline-flex items-center justify-center gap-1.5 w-full px-4 py-3 rounded-lg bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 transition-colors"
+                  >
+                    View full breakdown
+                    <span aria-hidden="true">↓</span>
+                  </button>
+                </div>
+              );
+            })()}
           </div>
 
           <p className="mt-3 text-xs text-slate-400 text-center">
-            Click any SDG circle to see its full policy breakdown and evidence quotes below.
+            Click any SDG circle to update the breakdown below.
           </p>
         </div>
 

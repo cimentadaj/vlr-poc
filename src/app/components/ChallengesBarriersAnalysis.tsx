@@ -4,6 +4,7 @@ import { Network, Clock, Zap, HeartHandshake, MoreHorizontal, Info, Users, Brief
 import { Tooltip as UITooltip, TooltipTrigger, TooltipContent } from './ui/tooltip';
 import type { LucideIcon } from 'lucide-react';
 import { REGIONS, CHALLENGE_CATEGORIES, ChallengeId, getSDGName } from './data/constants';
+import { useIsMobile } from '@/app/hooks/useIsMobile';
 import challengeRaw from '@/data/generated/challenge-distribution.json';
 import temporalRaw from '@/data/generated/temporal-trends.json';
 
@@ -81,6 +82,7 @@ export function ChallengesBarriersAnalysis() {
   const [selectedRegion, setSelectedRegion] = useState<string>('All');
   const [hoveredSDG, setHoveredSDG] = useState<number | null>(null);
   const [hoveredSlope, setHoveredSlope] = useState<string | null>(null);
+  const isMobile = useIsMobile();
 
   // Top-5 rule: the SDGs where the selected challenge represents the largest share
   // of that SDG's total reported barriers. Always exactly 5 — or fewer only when
@@ -195,10 +197,10 @@ export function ChallengesBarriersAnalysis() {
                   <TooltipTrigger asChild>
                     <button
                       onClick={() => setSelectedChallenge(cat.id)}
-                      className={`flex items-center gap-2 rounded-xl border-2 transition-all ${
+                      className={`flex items-center justify-center gap-2 rounded-xl border-2 transition-all min-w-[44px] min-h-[44px] ${
                         isSelected
-                          ? 'border-current shadow-lg px-4 py-2'
-                          : 'border-slate-200 hover:border-slate-300 p-2'
+                          ? 'border-current shadow-lg px-4 py-2.5'
+                          : 'border-slate-200 hover:border-slate-300 p-2.5'
                       }`}
                       style={{ color: isSelected ? cat.color : undefined }}
                     >
@@ -258,7 +260,7 @@ export function ChallengesBarriersAnalysis() {
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => setSelectedRegion('All')}
-                className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
+                className={`px-3 py-3 rounded text-sm font-medium transition-colors ${
                   selectedRegion === 'All'
                     ? 'bg-blue-600 text-white'
                     : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
@@ -270,7 +272,7 @@ export function ChallengesBarriersAnalysis() {
                 <button
                   key={region}
                   onClick={() => setSelectedRegion(region)}
-                  className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
+                  className={`px-3 py-3 rounded text-sm font-medium transition-colors ${
                     selectedRegion === region
                       ? 'bg-blue-600 text-white'
                       : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
@@ -283,8 +285,16 @@ export function ChallengesBarriersAnalysis() {
           </div>
 
           <div className="relative">
-            <div className="bg-slate-50 rounded-lg p-8 min-h-[650px] border-2 border-slate-200">
-              <svg width="100%" height="650" className="overflow-visible">
+            <div
+              className="bg-slate-50 rounded-lg p-4 sm:p-6 md:p-8 border-2 border-slate-200"
+              style={{ minHeight: isMobile ? 480 : 650 }}
+            >
+              <svg
+                viewBox="0 0 900 650"
+                preserveAspectRatio="xMidYMid meet"
+                className="overflow-visible w-full"
+                style={{ height: isMobile ? 460 : 650 }}
+              >
                 {/* Draw connections */}
                 {connectedSDGs.map((sdg1, i) =>
                   connectedSDGs.slice(i + 1).map((sdg2) => {
@@ -334,7 +344,13 @@ export function ChallengesBarriersAnalysis() {
                   const challengeColor = selectedChallengeDetails?.color || '#3b82f6';
 
                   return (
-                    <g key={sdg} onMouseEnter={() => setHoveredSDG(sdg)} onMouseLeave={() => setHoveredSDG(null)}>
+                    <g
+                      key={sdg}
+                      onMouseEnter={() => setHoveredSDG(sdg)}
+                      onMouseLeave={() => setHoveredSDG(null)}
+                      onClick={() => setHoveredSDG(prev => prev === sdg ? null : sdg)}
+                      style={{ cursor: 'pointer' }}
+                    >
                       <circle
                         cx={x}
                         cy={y}
@@ -476,8 +492,8 @@ export function ChallengesBarriersAnalysis() {
                 <div className="flex justify-center">
                   <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-md" style={{ fontFamily: 'system-ui, sans-serif' }}>
                     {/* Column headers */}
-                    <text x={colLeft} y={12} textAnchor="middle" fontSize={12} fontWeight={600} fill="#475569">2019</text>
-                    <text x={colRight} y={12} textAnchor="middle" fontSize={12} fontWeight={600} fill="#475569">2025</text>
+                    <text x={colLeft} y={12} textAnchor="middle" fontSize={13} fontWeight={600} fill="#475569">2019</text>
+                    <text x={colRight} y={12} textAnchor="middle" fontSize={13} fontWeight={600} fill="#475569">2025</text>
 
                     {/* Vertical axes */}
                     <line x1={colLeft} y1={padTop} x2={colLeft} y2={h - padBot} stroke="#e2e8f0" />
@@ -497,6 +513,7 @@ export function ChallengesBarriersAnalysis() {
                           style={{ cursor: 'pointer' }}
                           onMouseEnter={() => setHoveredSlope(d.id)}
                           onMouseLeave={() => setHoveredSlope(null)}
+                          onClick={() => setHoveredSlope(prev => prev === d.id ? null : d.id)}
                         >
                           {/* Invisible wider hit area for easier hovering */}
                           <line
@@ -512,19 +529,19 @@ export function ChallengesBarriersAnalysis() {
                           {/* Left dot + label */}
                           <circle cx={colLeft} cy={y1} r={highlighted ? 5 : 3} fill={d.color} />
                           <text x={colLeft - 8} y={y1 + 4} textAnchor="end"
-                            fontSize={highlighted ? 11 : 9} fill={d.color} fontWeight={highlighted ? 700 : 400}>
+                            fontSize={highlighted ? 13 : 11} fill={d.color} fontWeight={highlighted ? 700 : 400}>
                             {d.start}%
                           </text>
                           {/* Right dot + label */}
                           <circle cx={colRight} cy={y2} r={highlighted ? 5 : 3} fill={d.color} />
                           <text x={colRight + 8} y={y2 + 4} textAnchor="start"
-                            fontSize={highlighted ? 11 : 9} fill={d.color} fontWeight={highlighted ? 700 : 400}>
+                            fontSize={highlighted ? 13 : 11} fill={d.color} fontWeight={highlighted ? 700 : 400}>
                             {d.end}%
                           </text>
                           {/* Name label on highlighted line */}
                           {highlighted && (
                             <text x={(colLeft + colRight) / 2} y={Math.min(y1, y2) - 10} textAnchor="middle"
-                              fontSize={11} fill={d.color} fontWeight={700}>
+                              fontSize={12} fill={d.color} fontWeight={700}>
                               {d.name} ({d.change > 0 ? '+' : ''}{d.change.toFixed(1)}pp)
                             </text>
                           )}

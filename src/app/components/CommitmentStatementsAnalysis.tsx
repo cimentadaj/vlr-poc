@@ -228,7 +228,7 @@ export function CommitmentStatementsAnalysis() {
                 </Bar>
               </BarChart>
             </ResponsiveContainer>
-            <div className="flex items-center gap-4 mt-2 text-xs text-slate-500">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-2 text-xs text-slate-500">
               <span className="flex items-center gap-1"><span className="w-3 h-3 rounded" style={{backgroundColor:'#ef4444'}}></span> &lt;0.7x Deficit</span>
               <span className="flex items-center gap-1"><span className="w-3 h-3 rounded" style={{backgroundColor:'#f59e0b'}}></span> 0.7-0.9x Moderate</span>
               <span className="flex items-center gap-1"><span className="w-3 h-3 rounded" style={{backgroundColor:'#fbbf24'}}></span> 0.9-1.1x Balanced</span>

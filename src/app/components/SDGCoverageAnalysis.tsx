@@ -189,6 +189,7 @@ export function SDGCoverageAnalysis() {
                 {insights.mostReported.coverage}% of VLRs
                 {insights.coverageGap ? ` · ${insights.coverageGap}× more than the least-covered SDG` : ''}
               </div>
+              <div className="text-xs text-slate-500 mt-1">Mentioned by the most VLRs — breadth of reach</div>
             </div>
             <div className="border-l-4 border-amber-500 pl-4">
               <div className="text-sm text-slate-600 mb-1">Fastest Rising</div>

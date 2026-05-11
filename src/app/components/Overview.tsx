@@ -515,6 +515,7 @@ export function Overview() {
                 <div className="text-sm text-blue-600 tabular-nums">
                   {sdgHighlights.mostReported.count.toLocaleString()} total items
                 </div>
+                <div className="text-xs text-slate-500 mt-1">Where cities write the most — depth of content</div>
               </div>
             )}
             {sdgHighlights.mostSkipped && (

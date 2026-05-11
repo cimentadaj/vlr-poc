@@ -69,6 +69,38 @@ const REGION_COLORS: Record<string, string> = {
   'North America': '#00689D',
 };
 
+// Quadrant-based interpretations. Quadrant is defined by where the dot lands
+// relative to the median (medX, medY) of all SDG centroids on the X/Y axes
+// (X = Direct Investment %, Y = Strategic Planning %).
+type Quadrant = 'comprehensive' | 'planning_led' | 'investment_led' | 'engagement_led';
+
+const QUADRANT_LABEL: Record<Quadrant, string> = {
+  comprehensive: 'Comprehensive',
+  planning_led: 'Planning-led',
+  investment_led: 'Investment-led',
+  engagement_led: 'Engagement & partnership-led',
+};
+
+const QUADRANT_DESCRIPTION: Record<Quadrant, string> = {
+  comprehensive:
+    'Cities go all-in on this SDG — substantial direct investment AND strong strategic planning. Treated as a top-priority area where both money and frameworks line up.',
+  planning_led:
+    'Cities write plans, strategies and frameworks for this SDG but commit less direct funding. Heavy on strategy, lighter on execution-stage spending.',
+  investment_led:
+    'Cities pour direct investment and procurement into this SDG, but without a heavy strategic-planning wrapper. Action and capital outpace the policy frameworks around them.',
+  engagement_led:
+    'Cities address this SDG mainly through softer tools — partnerships, awareness campaigns and voluntary commitments — rather than dedicated funding or formal planning.',
+};
+
+function getQuadrant(x: number, y: number, medX: number, medY: number): Quadrant {
+  const highX = x >= medX;
+  const highY = y >= medY;
+  if (highX && highY) return 'comprehensive';
+  if (!highX && highY) return 'planning_led';
+  if (highX && !highY) return 'investment_led';
+  return 'engagement_led';
+}
+
 export function PolicyRecommendationSynthesis() {
   const [selectedSDG, setSelectedSDG] = useState<number | null>(11);
   const [activeRegion, setActiveRegion] = useState<string>('All');
@@ -151,6 +183,16 @@ export function PolicyRecommendationSynthesis() {
 
   const [hoveredSDG, setHoveredSDG] = useState<number | null>(null);
 
+  // Quadrant dividers (median X and Y across all SDG centroids)
+  const medians = useMemo(() => {
+    const xs = scatterData.map(s => s.cx).sort((a, b) => a - b);
+    const ys = scatterData.map(s => s.cy).sort((a, b) => a - b);
+    return {
+      medX: xs[Math.floor(xs.length / 2)],
+      medY: ys[Math.floor(ys.length / 2)],
+    };
+  }, [scatterData]);
+
   // Chart dimensions and scales
   const chartW = 700, chartH = 460;
   const margin = { top: 30, right: 30, bottom: 50, left: 60 };
@@ -228,29 +270,20 @@ export function PolicyRecommendationSynthesis() {
               ))}
 
               {/* Quadrant dividers at median values */}
-              {(() => {
-                const xs = scatterData.map(s => s.cx).sort((a, b) => a - b);
-                const ys = scatterData.map(s => s.cy).sort((a, b) => a - b);
-                const medX = xs[Math.floor(xs.length / 2)];
-                const medY = ys[Math.floor(ys.length / 2)];
-                return (
-                  <>
-                    <line x1={scaleX(medX)} y1={margin.top} x2={scaleX(medX)} y2={margin.top + plotH}
-                      stroke="#94a3b8" strokeWidth={1} strokeDasharray="6 4" opacity={0.6} />
-                    <line x1={margin.left} y1={scaleY(medY)} x2={margin.left + plotW} y2={scaleY(medY)}
-                      stroke="#94a3b8" strokeWidth={1} strokeDasharray="6 4" opacity={0.6} />
-                    <text x={margin.left + 4} y={margin.top + plotH - 4} textAnchor="start"
-                      fontSize={11} fill="#94a3b8" fontWeight={500}>Engagement &amp; Partnership-led</text>
-                    <text x={margin.left + plotW - 4} y={margin.top + plotH - 4} textAnchor="end"
-                      fontSize={11} fill="#94a3b8" fontWeight={500}>Investment-led</text>
-                    <title>High direct investment + high strategic planning = balanced, multi-faceted policy approach</title>
-                    <text x={margin.left + plotW - 4} y={margin.top + 14} textAnchor="end"
-                      fontSize={11} fill="#94a3b8" fontWeight={500}>Comprehensive</text>
-                    <text x={margin.left + 4} y={margin.top + 14} textAnchor="start"
-                      fontSize={11} fill="#94a3b8" fontWeight={500}>Planning-led</text>
-                  </>
-                );
-              })()}
+              <>
+                <line x1={scaleX(medians.medX)} y1={margin.top} x2={scaleX(medians.medX)} y2={margin.top + plotH}
+                  stroke="#94a3b8" strokeWidth={1} strokeDasharray="6 4" opacity={0.6} />
+                <line x1={margin.left} y1={scaleY(medians.medY)} x2={margin.left + plotW} y2={scaleY(medians.medY)}
+                  stroke="#94a3b8" strokeWidth={1} strokeDasharray="6 4" opacity={0.6} />
+                <text x={margin.left + 4} y={margin.top + plotH - 4} textAnchor="start"
+                  fontSize={11} fill="#94a3b8" fontWeight={500}>Engagement &amp; Partnership-led</text>
+                <text x={margin.left + plotW - 4} y={margin.top + plotH - 4} textAnchor="end"
+                  fontSize={11} fill="#94a3b8" fontWeight={500}>Investment-led</text>
+                <text x={margin.left + plotW - 4} y={margin.top + 14} textAnchor="end"
+                  fontSize={11} fill="#94a3b8" fontWeight={500}>Comprehensive</text>
+                <text x={margin.left + 4} y={margin.top + 14} textAnchor="start"
+                  fontSize={11} fill="#94a3b8" fontWeight={500}>Planning-led</text>
+              </>
 
               {/* Axes */}
               <line x1={margin.left} y1={margin.top + plotH} x2={margin.left + plotW} y2={margin.top + plotH} stroke="#94a3b8" />
@@ -338,18 +371,68 @@ export function PolicyRecommendationSynthesis() {
                 });
               })()}
 
-              {/* Hover tooltip */}
+              {/* Hover tooltip — SDG name + quadrant-specific interpretation */}
               {hoveredSDG !== null && (() => {
                 const sdg = scatterData.find(s => s.sdgId === hoveredSDG)!;
-                const tx = scaleX(sdg.cx);
-                const ty = scaleY(sdg.cy) - 24;
+                // Use the actual hovered dot's position (regional point if filtering by region)
+                const point = activeRegion === 'All'
+                  ? { x: sdg.cx, y: sdg.cy }
+                  : sdg.regionalPoints.find(rp => rp.region === activeRegion) || { x: sdg.cx, y: sdg.cy };
+                const dotX = scaleX(point.x);
+                const dotY = scaleY(point.y);
+                const quadrant = getQuadrant(point.x, point.y, medians.medX, medians.medY);
+                const quadrantLabel = QUADRANT_LABEL[quadrant];
+                const description = QUADRANT_DESCRIPTION[quadrant];
+
+                const tooltipW = 300;
+                const tooltipH = 100;
+                // Default: above the dot. Flip below if would clip plot top.
+                const desiredY = dotY - 16 - tooltipH;
+                const flipDown = desiredY < margin.top + 2;
+                const tooltipY = flipDown ? dotY + 22 : desiredY;
+                // Clamp horizontally within plot area
+                const tooltipX = Math.max(
+                  margin.left,
+                  Math.min(margin.left + plotW - tooltipW, dotX - tooltipW / 2),
+                );
+
                 return (
                   <g pointerEvents="none">
-                    <rect x={tx - 75} y={ty - 28} width={150} height={26} rx={4}
-                      fill="white" stroke="#e2e8f0" />
-                    <text x={tx} y={ty - 12} textAnchor="middle" fontSize={10} fill="#1e293b" fontWeight={600}>
-                      SDG {sdg.sdgId} — {sdg.name.length > 20 ? sdg.name.slice(0, 20) + '…' : sdg.name}
-                    </text>
+                    <rect
+                      x={tooltipX}
+                      y={tooltipY}
+                      width={tooltipW}
+                      height={tooltipH}
+                      rx={6}
+                      fill="white"
+                      stroke="#cbd5e1"
+                      strokeWidth={1}
+                      filter="drop-shadow(0 2px 4px rgba(15,23,42,0.12))"
+                    />
+                    <foreignObject x={tooltipX} y={tooltipY} width={tooltipW} height={tooltipH}>
+                      <div
+                        xmlns="http://www.w3.org/1999/xhtml"
+                        style={{
+                          padding: '10px 12px',
+                          fontFamily: 'system-ui, sans-serif',
+                          fontSize: 11,
+                          lineHeight: 1.4,
+                          color: '#1e293b',
+                          height: '100%',
+                          boxSizing: 'border-box',
+                        }}
+                      >
+                        <div style={{ fontSize: 12, fontWeight: 700, marginBottom: 2 }}>
+                          SDG {sdg.sdgId} — {sdg.name}
+                        </div>
+                        <div style={{ fontSize: 10, fontWeight: 600, color: SDG_COLORS[sdg.sdgId], marginBottom: 4, textTransform: 'uppercase', letterSpacing: '0.03em' }}>
+                          {quadrantLabel}
+                        </div>
+                        <div style={{ color: '#475569' }}>
+                          {description}
+                        </div>
+                      </div>
+                    </foreignObject>
                   </g>
                 );
               })()}

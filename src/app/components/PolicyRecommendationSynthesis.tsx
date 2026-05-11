@@ -270,7 +270,7 @@ export function PolicyRecommendationSynthesis() {
             <div className="flex justify-center flex-1 min-w-0">
             <svg
               viewBox={`0 0 ${chartW} ${chartH}`}
-              className="w-full max-w-3xl"
+              className="w-full"
               style={{ fontFamily: 'system-ui, sans-serif' }}
             >
               {/* Grid lines */}
@@ -385,8 +385,10 @@ export function PolicyRecommendationSynthesis() {
                 });
               })()}
 
-              {/* Hover tooltip — SDG name + quadrant-specific interpretation */}
-              {hoveredSDG !== null && (() => {
+              {/* Hover tooltip — SDG name + quadrant-specific interpretation.
+                  Suppressed on mobile/touch (no hover) — touch users get the
+                  same content in the persistent side widget below. */}
+              {hoveredSDG !== null && !isMobile && (() => {
                 const sdg = scatterData.find(s => s.sdgId === hoveredSDG)!;
                 // Use the actual hovered dot's position (regional point if filtering by region)
                 const point = activeRegion === 'All'
@@ -544,6 +546,7 @@ export function PolicyRecommendationSynthesis() {
                     angle={-35}
                     textAnchor="end"
                     height={100}
+                    interval={0}
                     tick={{ fontSize: 11 }}
                   />
                   <YAxis label={{ value: 'Percentage (%)', angle: -90, position: 'insideLeft' }} />

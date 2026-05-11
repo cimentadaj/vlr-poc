@@ -12,10 +12,11 @@ import {
   Legend,
   Cell
 } from 'recharts';
-import { AlertCircle, TrendingUp, TrendingDown, Filter, ChevronDown } from 'lucide-react';
+import { AlertCircle, TrendingUp, TrendingDown, Filter, ChevronDown, ArrowLeftRight } from 'lucide-react';
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from './ui/collapsible';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { getSDGName } from './data/constants';
+import { useIsMobile } from '@/app/hooks/useIsMobile';
 import coverageRaw from '@/data/generated/sdg-coverage.json';
 import metadataRaw from '@/data/generated/metadata.json';
 
@@ -54,6 +55,7 @@ export function SDGCoverageAnalysis() {
   const [strategicOpen, setStrategicOpen] = useState(false);
   const [hoveredCell, setHoveredCell] = useState<{region: string, sdg: number} | null>(null);
   const [hoveredBar, setHoveredBar] = useState<number | null>(null);
+  const isMobile = useIsMobile();
 
   // Filter coverage data based on selections
   const filteredCoverage = useMemo(() => {
@@ -304,7 +306,7 @@ export function SDGCoverageAnalysis() {
             <h3 className="text-lg font-semibold text-slate-900 mb-4">
               SDG Coverage Ranking
             </h3>
-            <ResponsiveContainer width="100%" height={600}>
+            <ResponsiveContainer width="100%" height={isMobile ? 400 : 600}>
               <BarChart
                 data={sdgCoverageStats}
                 layout="vertical"
@@ -315,7 +317,7 @@ export function SDGCoverageAnalysis() {
                 <YAxis
                   type="category"
                   dataKey="name"
-                  width={180}
+                  width={isMobile ? 130 : 180}
                   tick={{ fontSize: 11 }}
                 />
                 <Tooltip
@@ -335,9 +337,11 @@ export function SDGCoverageAnalysis() {
                       key={`cell-${index}`}
                       fill={getCoverageColor(entry.coverage)}
                       fillOpacity={hoveredBar !== null && hoveredBar !== index ? 0.3 : 1}
+                      // Hover for desktop, tap for touch — both toggle the same state.
                       onMouseEnter={() => setHoveredBar(index)}
                       onMouseLeave={() => setHoveredBar(null)}
-                      style={{ transition: 'fill-opacity 0.15s' }}
+                      onClick={() => setHoveredBar(prev => prev === index ? null : index)}
+                      style={{ transition: 'fill-opacity 0.15s', cursor: 'pointer' }}
                     />
                   ))}
                 </Bar>
@@ -376,6 +380,11 @@ export function SDGCoverageAnalysis() {
                       <span>≥90%</span>
                     </div>
                   </div>
+                </div>
+                {/* Mobile scroll hint — only shown < md where the heatmap can't fit */}
+                <div className="md:hidden mb-2 flex items-center gap-2 text-xs text-slate-500">
+                  <ArrowLeftRight className="w-3.5 h-3.5" aria-hidden="true" />
+                  <span>Scroll horizontally to see all 17 SDGs</span>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full border-collapse">
@@ -419,6 +428,11 @@ export function SDGCoverageAnalysis() {
                                 title={`${sdg.fullName}: ${coverage}% of VLRs`}
                                 onMouseEnter={() => setHoveredCell({ region, sdg: sdg.id })}
                                 onMouseLeave={() => setHoveredCell(null)}
+                                onClick={() => setHoveredCell(prev =>
+                                  prev?.region === region && prev?.sdg === sdg.id
+                                    ? null
+                                    : { region, sdg: sdg.id },
+                                )}
                               >
                                 {coverage}%
                               </td>

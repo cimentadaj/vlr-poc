@@ -80,7 +80,7 @@ export function Root() {
               <Link
                 key={to}
                 to={to}
-                className={`flex items-center gap-2 px-4 py-2 border-b-2 text-sm font-medium transition-colors ${
+                className={`flex items-center gap-2 px-4 py-3 border-b-2 text-sm font-medium transition-colors ${
                   isActive(to)
                     ? 'text-blue-700 border-blue-600 bg-transparent'
                     : 'border-transparent text-slate-600 hover:bg-slate-100'
@@ -95,7 +95,7 @@ export function Root() {
           {/* Desktop methodology link pushed to the right */}
           <Link
             to="/methodology"
-            className={`hidden xl:inline ml-auto text-xs tracking-wide transition-colors ${
+            className={`hidden xl:inline-flex items-center ml-auto min-h-11 px-3 text-xs tracking-wide transition-colors ${
               isActive('/methodology')
                 ? 'text-slate-900'
                 : 'text-slate-500 hover:text-slate-900'

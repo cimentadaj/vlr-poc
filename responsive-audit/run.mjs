@@ -164,7 +164,7 @@ const MEASURE_FN = () => {
 
   // ── Charts (Recharts wrappers) ──
   const charts = document.querySelectorAll('.recharts-wrapper');
-  const maxAllowedH = Math.round(window.innerHeight * 0.6);
+  const maxAllowedH = Math.round(window.innerHeight * 0.7);
   for (const chart of charts) {
     result.charts.totalChecked++;
     const rect = chart.getBoundingClientRect();

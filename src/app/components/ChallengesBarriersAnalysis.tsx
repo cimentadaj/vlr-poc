@@ -197,12 +197,12 @@ export function ChallengesBarriersAnalysis() {
                   <TooltipTrigger asChild>
                     <button
                       onClick={() => setSelectedChallenge(cat.id)}
-                      className={`flex items-center justify-center gap-2 rounded-xl border-2 transition-all min-w-[44px] min-h-[44px] ${
+                      className={`flex items-center justify-center gap-2 rounded-xl border-2 transition-all ${
                         isSelected
                           ? 'border-current shadow-lg px-4 py-2.5'
                           : 'border-slate-200 hover:border-slate-300 p-2.5'
                       }`}
-                      style={{ color: isSelected ? cat.color : undefined }}
+                      style={{ color: isSelected ? cat.color : undefined, minWidth: 44, minHeight: 44 }}
                     >
                       <Icon className={isSelected ? 'w-6 h-6' : 'w-5 h-5 text-slate-500'} />
                       {isSelected && <span className="text-sm font-medium">{meta.shortName}</span>}
@@ -235,7 +235,11 @@ export function ChallengesBarriersAnalysis() {
                 </h3>
                 <UITooltip>
                   <TooltipTrigger asChild>
-                    <button type="button" className="text-slate-400 hover:text-slate-600" aria-label="How is this computed?">
+                    <button
+                      type="button"
+                      className="inline-flex items-center justify-center w-11 h-11 text-slate-400 hover:text-slate-600 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 shrink-0"
+                      aria-label="How is this computed?"
+                    >
                       <Info className="w-4 h-4" />
                     </button>
                   </TooltipTrigger>

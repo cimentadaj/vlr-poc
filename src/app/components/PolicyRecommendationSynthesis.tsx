@@ -384,8 +384,8 @@ export function PolicyRecommendationSynthesis() {
                 const quadrantLabel = QUADRANT_LABEL[quadrant];
                 const description = QUADRANT_DESCRIPTION[quadrant];
 
-                const tooltipW = 300;
-                const tooltipH = 100;
+                const tooltipW = 340;
+                const tooltipH = 150;
                 // Default: above the dot. Flip below if would clip plot top.
                 const desiredY = dotY - 16 - tooltipH;
                 const flipDown = desiredY < margin.top + 2;

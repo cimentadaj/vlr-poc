@@ -112,18 +112,20 @@ const MEASURE_FN = () => {
         getComputedStyle(el).display === 'inline' &&
         el.textContent.length > 0;
       if (isInlineLink) continue;
-      // Exclude external-origin anchor links (brand exit-to-home, mailto, etc.).
-      // Cross-host anchors aren't primary in-app actions and have their own
-      // tap-target expectations on the destination site.
+      // Exclude exit-the-app anchor links — brand wordmarks pointing home,
+      // mailto, tel, cross-host. The SPA lives under /vlr-observatory/; any
+      // anchor that navigates outside that prefix is an exit affordance, not
+      // a primary in-app action, and has its own tap-target expectations on
+      // the destination site.
       if (el.tagName === 'A' && el.href) {
         try {
           const dest = new URL(el.href, window.location.href);
-          if (
-            dest.origin !== window.location.origin ||
-            dest.protocol === 'mailto:' ||
-            dest.protocol === 'tel:'
-          )
-            continue;
+          const isExternalOrigin = dest.origin !== window.location.origin;
+          const isNonHttp = dest.protocol === 'mailto:' || dest.protocol === 'tel:';
+          const isOutsideSpa =
+            dest.origin === window.location.origin &&
+            !dest.pathname.startsWith('/vlr-observatory');
+          if (isExternalOrigin || isNonHttp || isOutsideSpa) continue;
         } catch {}
       }
       result.tapTargets.failures.push({

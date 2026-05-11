@@ -112,6 +112,20 @@ const MEASURE_FN = () => {
         getComputedStyle(el).display === 'inline' &&
         el.textContent.length > 0;
       if (isInlineLink) continue;
+      // Exclude external-origin anchor links (brand exit-to-home, mailto, etc.).
+      // Cross-host anchors aren't primary in-app actions and have their own
+      // tap-target expectations on the destination site.
+      if (el.tagName === 'A' && el.href) {
+        try {
+          const dest = new URL(el.href, window.location.href);
+          if (
+            dest.origin !== window.location.origin ||
+            dest.protocol === 'mailto:' ||
+            dest.protocol === 'tel:'
+          )
+            continue;
+        } catch {}
+      }
       result.tapTargets.failures.push({
         tag: el.tagName,
         text: (el.textContent || '').trim().slice(0, 40),

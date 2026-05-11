@@ -12,6 +12,7 @@ import {
 import { TrendingUp, Quote, Info } from 'lucide-react';
 import { Tooltip as UITooltip, TooltipTrigger, TooltipContent } from './ui/tooltip';
 import { REGIONS, POLICY_CATEGORIES, getSDGName } from './data/constants';
+import { useIsMobile } from '@/app/hooks/useIsMobile';
 import policyRaw from '@/data/generated/policy-distribution.json';
 import evidenceRaw from '@/data/generated/evidence-quotes.json';
 
@@ -201,6 +202,8 @@ export function PolicyRecommendationSynthesis() {
     }
   }, [selectedSDG]);
 
+  const isMobile = useIsMobile();
+
   // Quadrant dividers (median X and Y across all SDG centroids)
   const medians = useMemo(() => {
     const xs = scatterData.map(s => s.cx).sort((a, b) => a - b);
@@ -247,7 +250,7 @@ export function PolicyRecommendationSynthesis() {
           <div className="flex flex-wrap gap-2 mb-4">
             <button
               onClick={() => setActiveRegion('All')}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all border ${
+              className={`px-4 py-3 rounded-full text-sm font-medium transition-all border ${
                 activeRegion === 'All'
                   ? 'bg-slate-800 text-white border-transparent shadow-sm'
                   : 'bg-white text-slate-600 border-slate-200 hover:border-slate-300'
@@ -259,7 +262,7 @@ export function PolicyRecommendationSynthesis() {
               <button
                 key={region}
                 onClick={() => setActiveRegion(region)}
-                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all border ${
+                className={`px-4 py-3 rounded-full text-sm font-medium transition-all border ${
                   activeRegion === region
                     ? 'text-white border-transparent shadow-sm'
                     : 'bg-white text-slate-600 border-slate-200 hover:border-slate-300'
@@ -294,13 +297,13 @@ export function PolicyRecommendationSynthesis() {
                 <line x1={margin.left} y1={scaleY(medians.medY)} x2={margin.left + plotW} y2={scaleY(medians.medY)}
                   stroke="#94a3b8" strokeWidth={1} strokeDasharray="6 4" opacity={0.6} />
                 <text x={margin.left + 4} y={margin.top + plotH - 4} textAnchor="start"
-                  fontSize={11} fill="#94a3b8" fontWeight={500}>Engagement &amp; Partnership-led</text>
+                  fontSize={13} fill="#94a3b8" fontWeight={500}>Engagement &amp; Partnership-led</text>
                 <text x={margin.left + plotW - 4} y={margin.top + plotH - 4} textAnchor="end"
-                  fontSize={11} fill="#94a3b8" fontWeight={500}>Investment-led</text>
+                  fontSize={13} fill="#94a3b8" fontWeight={500}>Investment-led</text>
                 <text x={margin.left + plotW - 4} y={margin.top + 14} textAnchor="end"
-                  fontSize={11} fill="#94a3b8" fontWeight={500}>Comprehensive</text>
+                  fontSize={13} fill="#94a3b8" fontWeight={500}>Comprehensive</text>
                 <text x={margin.left + 4} y={margin.top + 14} textAnchor="start"
-                  fontSize={11} fill="#94a3b8" fontWeight={500}>Planning-led</text>
+                  fontSize={13} fill="#94a3b8" fontWeight={500}>Planning-led</text>
               </>
 
               {/* Axes */}
@@ -309,26 +312,26 @@ export function PolicyRecommendationSynthesis() {
 
               {/* X tick labels */}
               {[0, 10, 20, 30, 40, 50, 60].map(v => (
-                <text key={`xt-${v}`} x={scaleX(v)} y={margin.top + plotH + 18} textAnchor="middle"
-                  fontSize={10} fill="#64748b">{v}%</text>
+                <text key={`xt-${v}`} x={scaleX(v)} y={margin.top + plotH + 20} textAnchor="middle"
+                  fontSize={13} fill="#64748b">{v}%</text>
               ))}
               {/* Y tick labels */}
               {[0, 10, 20, 30, 40, 50].map(v => (
                 <text key={`yt-${v}`} x={margin.left - 8} y={scaleY(v) + 4} textAnchor="end"
-                  fontSize={10} fill="#64748b">{v}%</text>
+                  fontSize={13} fill="#64748b">{v}%</text>
               ))}
 
               {/* Axis labels */}
               <text x={margin.left + plotW / 2} y={chartH - 5} textAnchor="middle"
-                fontSize={12} fill="#475569">Direct Investment →</text>
+                fontSize={14} fill="#475569">Direct Investment →</text>
               <text x={15} y={margin.top + plotH / 2} textAnchor="middle"
-                fontSize={12} fill="#475569" transform={`rotate(-90, 15, ${margin.top + plotH / 2})`}>Strategic Planning →</text>
+                fontSize={14} fill="#475569" transform={`rotate(-90, 15, ${margin.top + plotH / 2})`}>Strategic Planning →</text>
 
               {/* Centroid dots — shown in "All Regions" mode */}
               {activeRegion === 'All' && scatterData.map(sdg => {
                 const isSelected = selectedSDG === sdg.sdgId;
                 const isHovered = hoveredSDG === sdg.sdgId;
-                const r = isSelected ? 20 : isHovered ? 18 : 15;
+                const r = (isSelected ? 22 : isHovered ? 20 : (isMobile ? 18 : 15));
                 return (
                   <g
                     key={sdg.sdgId}
@@ -346,7 +349,7 @@ export function PolicyRecommendationSynthesis() {
                     <text
                       x={scaleX(sdg.cx)} y={scaleY(sdg.cy) + 1}
                       textAnchor="middle" dominantBaseline="middle"
-                      fontSize={isSelected ? 11 : 10} fontWeight={700} fill="white"
+                      fontSize={isSelected ? 12 : 11} fontWeight={700} fill="white"
                     >
                       {sdg.sdgId}
                     </text>
@@ -362,7 +365,7 @@ export function PolicyRecommendationSynthesis() {
                   if (!p) return null;
                   const isSelected = selectedSDG === sdg.sdgId;
                   const isHovered = hoveredSDG === sdg.sdgId;
-                  const r = isSelected ? 20 : isHovered ? 18 : 15;
+                  const r = (isSelected ? 22 : isHovered ? 20 : (isMobile ? 18 : 15));
                   return (
                     <g
                       key={`reg-${sdg.sdgId}`}
@@ -380,7 +383,7 @@ export function PolicyRecommendationSynthesis() {
                       <text
                         x={scaleX(p.x)} y={scaleY(p.y) + 1}
                         textAnchor="middle" dominantBaseline="middle"
-                        fontSize={isSelected ? 11 : 10} fontWeight={700} fill="white"
+                        fontSize={isSelected ? 12 : 11} fontWeight={700} fill="white"
                       >
                         {sdg.sdgId}
                       </text>
@@ -402,8 +405,8 @@ export function PolicyRecommendationSynthesis() {
                 const quadrantLabel = QUADRANT_LABEL[quadrant];
                 const description = QUADRANT_DESCRIPTION[quadrant];
 
-                const tooltipW = 340;
-                const tooltipH = 145;
+                const tooltipW = isMobile ? 240 : 340;
+                const tooltipH = isMobile ? 175 : 145;
                 // Default: above the dot. Flip below if would clip plot top.
                 const desiredY = dotY - 16 - tooltipH;
                 const flipDown = desiredY < margin.top + 2;

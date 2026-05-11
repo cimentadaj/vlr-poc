@@ -294,7 +294,7 @@ export function ChallengesBarriersAnalysis() {
               style={{ minHeight: isMobile ? 480 : 650 }}
             >
               <svg
-                viewBox="0 0 900 650"
+                viewBox={isMobile ? '170 40 560 560' : '0 0 900 650'}
                 preserveAspectRatio="xMidYMid meet"
                 className="overflow-visible w-full"
                 style={{ height: isMobile ? 460 : 650 }}
